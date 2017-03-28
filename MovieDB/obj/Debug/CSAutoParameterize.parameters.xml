@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-MovieDB-20160715041019.mdf;Initial Catalog=aspnet-MovieDB-20160715041019;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Conor\\Documents\\Visual\ Studio\ 2013\\Projects\\MovieDB\\MovieDB\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="MoviesDBEntities-Web.config Connection String" description="MoviesDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.MoviesDBModel.csdl|res://*/Models.MoviesDBModel.ssdl|res://*/Models.MoviesDBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\v11.0;attachdbfilename=|DataDirectory|\MoviesDB.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Conor\\Documents\\Visual\ Studio\ 2013\\Projects\\MovieDB\\MovieDB\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MoviesDBEntities']/@connectionString" />
+  </parameter>
+  <parameter name="Model1-Web.config Connection String" description="Model1 Connection String used in web.config by the application to access the database." defaultValue="data source=(LocalDB)\v11.0;attachdbfilename=|DataDirectory|\MoviesDB.mdf;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Conor\\Documents\\Visual\ Studio\ 2013\\Projects\\MovieDB\\MovieDB\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Model1']/@connectionString" />
+  </parameter>
+</parameters>
