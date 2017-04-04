@@ -27,12 +27,12 @@ namespace MovieDB.Controllers
 
         }
 
-        public ActionResult MovieDB()
-        {
+        //public ActionResult MovieDB()
+        //{
 
-            return View(_db.Movies.ToList());
+        //    return View(_db.Movies.ToList());
 
-        }
+        //}
 
         public ActionResult Projects()
         {
