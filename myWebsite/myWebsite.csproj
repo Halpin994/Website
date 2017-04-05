@@ -167,33 +167,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.cs" />
-    <Compile Include="Models\Movie.cs">
-      <DependentUpon>MoviesDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MoviesDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoviesDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MoviesDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoviesDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MoviesDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoviesDBModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\MoviesDB.mdf" />
-    <Content Include="App_Data\MoviesDB_log.ldf">
-      <DependentUpon>MoviesDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -202,23 +180,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\MoviesDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MoviesDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MoviesDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MoviesDBModel.edmx</DependentUpon>
-      <LastGenOutput>MoviesDBModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MoviesDBModel.edmx.diagram">
-      <DependentUpon>MoviesDBModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\MoviesDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MoviesDBModel.edmx</DependentUpon>
-      <LastGenOutput>MoviesDBModel.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
