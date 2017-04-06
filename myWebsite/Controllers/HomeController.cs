@@ -24,5 +24,11 @@ namespace myWebsite.Controllers
 
         }
 
+        public ActionResult ContactMe()
+        {
+
+            return View();
+
+        }
     }
 }
