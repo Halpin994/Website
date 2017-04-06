@@ -35,8 +35,8 @@
             The domain conorhalpin.eu was purchased and pointed at my EC2 servers ip and port which IIS is constantly serving through.
         </p>
         <p>
-            A second job was then created to monitor the success of the first job. If the first job's build is successful,
-            <br /> the second job will build into another folder which iis is pointing to. As a result an unsuccessful build will no longer break the website.
+            A second job was created so a post build step could be added to the first job. If the first job's build is successful,
+            <br /> the second job will build into another folder which IIS is now pointing to. As a result an unsuccessful build will no longer break the website.
         </p>
         <p>
             The Jenkins build status for the first job is shown above.
