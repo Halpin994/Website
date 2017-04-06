@@ -8,41 +8,58 @@
     <title>Projects</title>
 </head>
 <body>
-    <h3>Projects</h3>
-    <br />
-    <h4>ASP.Net MVC Website <a href='http://35.161.104.133:8080/job/myWebsite/'><img src='http://35.161.104.133:8080/job/myWebsite/badge/icon'></a></h4> 
-    <h5>• Automatic deployment system</h5>
-    <p>
-        In the beginning I created a basic website in Visual Studio using the MVC architecture pattern C# and HTML.<br />
-        This project was then pushed up to github which can be viewed <a href="https://github.com/Halpin994/Website">here</a>.<br />
-    </p>
-    <p>
-        Jenkins was linked to MSBuild and then set up to poll my repository every 2 minutes for any changes. If a commit was added to the<br />
-        repository, Jenkins would pull down the project and build it using MSBuild.
-    </p>
-    <p>
-        I then installed IIS 7 and pointed it at the workspace folder Jenkins builds the website into.<br />
-        The website would then automatically update through this set up whenever a change was made on the repository.
-    </p>
-    <p>
-        Now that I knew I could get this system to work I created an Amazon Web Services account. Using this I could set up an EC2 server. <br />
-        Once I had the EC2 server running I installed Jenkins and IIS 7 then set them up to work the same as on my local machine.<br />
-        The port that IIS serves through and the port Jenkins can be accessed through were then opened.
-    </p>
-    <p>
-        The domain conorhalpin.eu was purchased and pointed at my EC2 servers ip and port which IIS is constantly serving through.
-    </p>
-    <p>
-        The Jenkins build status is shown above.
-        <br /> This also links to the Jenkins job associated with the website, where the build history and changes can be seen.
-    </p>
- <br />
+    
+    <div>
+        <h3>Projects</h3>
+        <br />
+        <h4>ASP.Net MVC Website <a href='http://35.161.104.133:8080/job/myWebsite/'><img src='http://35.161.104.133:8080/job/myWebsite/badge/icon'></a></h4>
+        <h5>• Automatic deployment system</h5>
+        <p>
+            In the beginning I created a basic website in Visual Studio using the MVC architecture pattern, C# and HTML.<br />
+            This project was then pushed up to github which can be viewed <a href="https://github.com/Halpin994/Website">here</a>.<br />
+        </p>
+        <p>
+            Jenkins was linked to MSBuild and then set up to poll my repository every 2 minutes for any changes. If a commit was added to the<br />
+            repository, Jenkins would pull down the project and build it using MSBuild.
+        </p>
+        <p>
+            I then installed IIS 7 and pointed it at the workspace folder Jenkins builds the website into.<br />
+            The website would then automatically update through this set up whenever a change was made on the repository.
+        </p>
+        <p>
+            Now that I knew I could get this system to work I created an Amazon Web Services account. Using this I could set up an EC2 server. <br />
+            Once I had the EC2 server running I installed Jenkins and IIS 7 then set them up to work the same as on my local machine.<br />
+            The port that IIS serves through and the port Jenkins can be accessed through were then opened.
+        </p>
+        <p>
+            The domain conorhalpin.eu was purchased and pointed at my EC2 servers ip and port which IIS is constantly serving through.
+        </p>
+        <p>
+            The Jenkins build status is shown above.
+            <br /> This also links to the Jenkins job associated with the website, where the build history and changes can be seen.
+        </p>
 
-    <h4>The Academy - Final Year Project</h4>
-    <h5>• First person target shooting game</h5>
-    <iframe width="854" height="480" src="https://www.youtube.com/embed/sf2liWaX2Rw" frameborder="0" allowfullscreen></iframe>
+        <br />
+        <h4>The Academy - Final Year Project</h4>
+        <h5>• First person target shooting game</h5>
+        <style>
+            .embed-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                height: 0;
+                overflow: hidden;
+                max-width: 100%;
+            }
 
-    <div> 
+                .embed-container iframe, .embed-container object, .embed-container embed {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+        </style><div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
     </div>
+    
 </body>
 </html>
