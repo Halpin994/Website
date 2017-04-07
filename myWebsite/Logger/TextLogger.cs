@@ -12,7 +12,10 @@ namespace myWebsite.Logger
         string path = @"C:\logs\websitelogs.txt";
         public void Log(string input)
         {
-            File.WriteAllText(path, input);
+            using (var streamWriter = new StreamWriter(path, true))
+            {
+                streamWriter.WriteLine(input);
+            }
         }
     }
 }
