@@ -53,10 +53,14 @@ C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\MovieDB\bin\Microso
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\MovieDB\obj\Debug\myWebsite.csprojResolveAssemblyReference.cache
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\MovieDB\obj\Debug\myWebsite.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\MovieDB\obj\Debug\myWebsite.pdb
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\obj\Debug\myWebsite.csprojResolveAssemblyReference.cache
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\myWebsite.dll.config
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\myWebsite.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\myWebsite.pdb
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Antlr3.Runtime.dll
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Autofac.dll
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Autofac.Integration.Mvc.dll
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Autofac.Integration.Owin.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\EntityFramework.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\EntityFramework.SqlServer.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Microsoft.AspNet.Identity.Core.dll
@@ -82,6 +86,9 @@ C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Syste
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\System.Web.WebPages.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\System.Web.WebPages.Razor.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\WebGrease.dll
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Autofac.xml
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Autofac.Integration.Mvc.xml
+C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Autofac.Integration.Owin.xml
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\System.Web.Helpers.xml
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\System.Web.Mvc.xml
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\System.Web.Optimization.xml
@@ -105,6 +112,5 @@ C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Micro
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\obj\Debug\myWebsite.csprojResolveAssemblyReference.cache
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\obj\Debug\myWebsite.dll
 C:\Users\Conor\Documents\Visual Studio 2013\Projects\Website\myWebsite\obj\Debug\myWebsite.pdb
