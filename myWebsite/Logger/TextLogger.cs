@@ -15,6 +15,7 @@ namespace myWebsite.Logger
             using (var streamWriter = new StreamWriter(path, true))
             {
                 streamWriter.WriteLine(input);
+                streamWriter.Close();
             }
         }
     }
