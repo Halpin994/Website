@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using myWebsite.Logger;
+using myWebsite.Settings;
 
 namespace myWebsite.Controllers
 {
@@ -19,20 +20,20 @@ namespace myWebsite.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            _logger.Log(String.Format("Time={0},PageRequested={1},RemoteIP={2}.", DateTime.Now, "Index", Request.UserHostAddress));
+            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Index", Request.UserHostAddress));
             return View();
         }
 
         public ActionResult Projects()
         {
-            _logger.Log(String.Format("Time={0},PageRequested={1},RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress));
+            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress));
             return View();
 
         }
 
         public ActionResult ContactMe()
         {
-            _logger.Log(String.Format("Time={0},PageRequested={1},RemoteIP={2}.", DateTime.Now, "Contact Me", Request.UserHostAddress));
+            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Contact Me", Request.UserHostAddress));
             return View();
 
         }

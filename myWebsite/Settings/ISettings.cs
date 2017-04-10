@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using myWebsite.Settings;
 
-namespace myWebsite.Logger
+namespace myWebsite.Settings
 {
-    public interface ILogger
+    
+    public interface ISettings
     {
-        void Log(string input);
+        string logPath { get;}
     }
 }
