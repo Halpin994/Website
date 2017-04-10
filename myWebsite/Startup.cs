@@ -6,6 +6,7 @@ using Microsoft.Owin;
 using Owin;
 using System.Web.Mvc;
 using myWebsite.Logger;
+using myWebsite.Settings;
 
 [assembly: OwinStartupAttribute(typeof(myWebsite.Startup))]
 namespace myWebsite
@@ -23,6 +24,7 @@ namespace myWebsite
 
             //register types
             builder.RegisterType<TextLogger>().As<ILogger>().SingleInstance();
+            builder.RegisterType<WebsiteSettings>().As<ISettings>().SingleInstance();
 
             // Run other optional steps, like registering model binders,
             // web abstractions, etc., then set the dependency resolver
