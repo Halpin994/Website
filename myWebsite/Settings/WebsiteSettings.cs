@@ -8,9 +8,7 @@ namespace myWebsite.Settings
 {
     public class WebsiteSettings : ISettings
     {
-
-
-        string logPath { public get; private set; }
+        public string logPath { get; private set; }
 
         public WebsiteSettings()
         {

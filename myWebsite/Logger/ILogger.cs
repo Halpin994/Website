@@ -9,6 +9,6 @@ namespace myWebsite.Logger
 {
     public interface ILogger
     {
-        void Log(string input, ISettings settings);
+        void Log(string input);
     }
 }

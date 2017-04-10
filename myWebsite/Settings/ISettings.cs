@@ -9,6 +9,6 @@ namespace myWebsite.Settings
     
     public interface ISettings
     {
-        string logPath { public get;}
+        string logPath { get;}
     }
 }

@@ -10,9 +10,15 @@ namespace myWebsite.Logger
 {
     public class TextLogger : ILogger
     {
-        public void Log(string input, ISettings path)
+        private ISettings settings;
+
+        public TextLogger(ISettings webSiteSettings)
         {
-            using (var streamWriter = new StreamWriter(path.logPath, true))
+            settings = webSiteSettings;
+        }
+        public void Log(string input)
+        {
+            using (var streamWriter = new StreamWriter(settings.logPath, true))
             {
                 streamWriter.WriteLine(input);
                 streamWriter.Close();

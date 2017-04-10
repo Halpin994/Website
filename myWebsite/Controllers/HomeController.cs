@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using myWebsite.Logger;
+using myWebsite.Settings;
 
 namespace myWebsite.Controllers
 {
