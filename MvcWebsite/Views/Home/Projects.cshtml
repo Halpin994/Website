@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
 
 <!DOCTYPE html>
 
@@ -64,6 +64,16 @@
                 }
         </style><div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
     </div>
+
+    <h4>Comments</h4>
     
+    @foreach (var item in Model)
+    {
+        <pre>
+            @item.UserName:
+            @item.Comment
+        </pre>
+    }
+
 </body>
 </html>
