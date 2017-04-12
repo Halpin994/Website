@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
+
 <!DOCTYPE html>
 
 <html>
@@ -15,8 +16,17 @@
         </script>
         <p>Email: conorhalpin@outlook.com</p>
         <p>Phone: 085 819 0879</p>
-
-
     </div>
+
+    <h4>Comments</h4>
+
+    @foreach (var item in Model)
+    {
+        <pre>
+            @item.UserName:
+            @item.Comment
+        </pre>
+    }
+
 </body>
 </html>

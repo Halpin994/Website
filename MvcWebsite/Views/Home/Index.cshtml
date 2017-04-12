@@ -1,6 +1,4 @@
-﻿
-
-
+﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
 
 <html>
 <body>
@@ -17,6 +15,16 @@
     <p>
         Check out my projects page to see how I made this website.
     </p>
+
+    <h4>Comments</h4>
+
+    @foreach (var item in Model)
+    {
+        <pre>
+            @item.UserName:
+            @item.Comment
+        </pre>
+    }
    
 </body>
 </html>

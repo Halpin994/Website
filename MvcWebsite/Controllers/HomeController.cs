@@ -23,21 +23,24 @@ namespace MvcWebsite.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            var allComments = _messageBroker.GetComments();
             _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Index", Request.UserHostAddress));
-            return View();
+            return View(allComments);
         }
 
         public ActionResult Projects()
         {
+            var allComments = _messageBroker.GetComments();
             _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress));
-            return View();
+            return View(allComments);
 
         }
 
         public ActionResult ContactMe()
         {
+            var allComments = _messageBroker.GetComments();
             _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Contact Me", Request.UserHostAddress));
-            return View();
+            return View(allComments);
 
         }
     }
