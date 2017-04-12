@@ -5,22 +5,25 @@ using System.Web;
 
 using System.Net.Http;
 using MvcWebsite.Models;
+using MvcWebsite.Settings;
 
 namespace MvcWebsite.MessageBroker
 {
+    //Comment Client class
     public class MessageBrokerApi : IMessageBroker
     {
-        string _hostUri;
-        public MessageBrokerApi(string hostUri)
+        private ISettings settings;
+
+        public MessageBrokerApi(ISettings webSiteSettings) //aka CommentClient()
         {
-            _hostUri = hostUri;
+            settings = webSiteSettings;
         }
  
  
         public HttpClient CreateClient()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(new Uri(_hostUri), "api/comments/");
+            client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentUri);
             return client;
         }
  

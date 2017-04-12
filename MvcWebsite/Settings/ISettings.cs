@@ -9,5 +9,7 @@ namespace MvcWebsite.Settings
     public interface ISettings
     {
         string logPath { get;}
+        string hostUri { get;}
+        string commentUri { get;}
     }
 }
