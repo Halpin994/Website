@@ -14,6 +14,5 @@ namespace MvcWebsite.Settings
         {
             logPath = ConfigurationManager.AppSettings["LogPath"].ToString();
         }
-        
     }
 }
