@@ -10,6 +10,6 @@ namespace MvcWebsite.Settings
     {
         string logPath { get;}
         string hostUri { get;}
-        string commentUri { get;}
+        string commentApiPath { get; }
     }
 }

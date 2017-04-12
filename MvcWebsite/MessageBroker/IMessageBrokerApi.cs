@@ -9,7 +9,7 @@ using MvcWebsite.Models;
 
 namespace MvcWebsite.MessageBroker
 {
-    public interface IMessageBroker
+    public interface IMessageBrokerApi
     {
         HttpClient CreateClient();
         IEnumerable<CommentModel> GetComments();

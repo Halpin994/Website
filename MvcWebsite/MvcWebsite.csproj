@@ -177,7 +177,7 @@
     </Compile>
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\TextLogger.cs" />
-    <Compile Include="MessageBroker\IMessageBroker.cs" />
+    <Compile Include="MessageBroker\IMessageBrokerApi.cs" />
     <Compile Include="MessageBroker\MessageBrokerApi.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

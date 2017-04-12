@@ -16,7 +16,7 @@ namespace MvcWebsite.Settings
         {
             logPath = ConfigurationManager.AppSettings["LogPath"].ToString();
             hostUri = ConfigurationManager.AppSettings["HostUri"].ToString();
-            commentUri = ConfigurationManager.AppSettings["CommentUri"].ToString();
+            commentApiPath = ConfigurationManager.AppSettings["CommentApiPath"].ToString();
         }
     }
 }

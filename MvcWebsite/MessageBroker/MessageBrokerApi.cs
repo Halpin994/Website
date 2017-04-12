@@ -10,7 +10,7 @@ using MvcWebsite.Settings;
 namespace MvcWebsite.MessageBroker
 {
     //Comment Client class
-    public class MessageBrokerApi : IMessageBroker
+    public class MessageBrokerApi : IMessageBrokerApi
     {
         private ISettings settings;
 
@@ -23,7 +23,7 @@ namespace MvcWebsite.MessageBroker
         public HttpClient CreateClient()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentUri);
+            client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentApiPath);
             return client;
         }
  

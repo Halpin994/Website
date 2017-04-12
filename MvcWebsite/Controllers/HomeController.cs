@@ -6,15 +6,18 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using MvcWebsite.Logger;
 using MvcWebsite.Settings;
+using MvcWebsite.MessageBroker;
 
 namespace MvcWebsite.Controllers
 {
     public class HomeController : Controller
     {
         ILogger _logger;
-        public HomeController(ILogger textLogger)
+        IMessageBrokerApi _messageBroker;
+        public HomeController(ILogger textLogger, IMessageBrokerApi messageBroker)
         {
             _logger = textLogger;
+            _messageBroker = messageBroker;
         }
 
         // GET: Home
