@@ -20,10 +20,13 @@
 
     @foreach (var item in Model)
     {
+        if(item.Webpage == "Index")
+        {
         <pre>
-            @item.UserName:
-            @item.Comment
+<b>@item.UserName:</b>
+@item.Comment
         </pre>
+        }
     }
    
 </body>

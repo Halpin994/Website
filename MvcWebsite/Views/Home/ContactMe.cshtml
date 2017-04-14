@@ -22,10 +22,13 @@
 
     @foreach (var item in Model)
     {
-        <pre>
-            @item.UserName:
-            @item.Comment
-        </pre>
+        if (item.Webpage == "ContactMe")
+        {
+            <pre>
+<b>@item.UserName:</b>
+@item.Comment
+            </pre>
+        }
     }
 
 </body>
