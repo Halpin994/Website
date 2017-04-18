@@ -67,19 +67,24 @@
 
     <fieldset>
         <legend>Comments</legend>
-        <input type="text" placeholder="Not yet implemented..." />
-    </fieldset>
-    
-    @foreach (var item in Model)
-    {
-        if (item.Webpage == "Project")
+        <fieldset>
+            <p>
+                Please enter a username and comment (Not yet implemented)
+            </p>
+            <input type="text" placeholder="Username..." />
+            <input type="text" placeholder="Comment..." />
+        </fieldset>
+        @foreach (var item in Model)
         {
-            <fieldset>
-                <b>@item.UserName:</b>
-                @item.Comment
-            </fieldset>
+            if (item.Webpage == "Project")
+            {
+                <fieldset>
+                    <b>@item.UserName:</b>
+                    @item.Comment
+                </fieldset>
+            }
         }
-    }
+    </fieldset>
 
 </body>
 </html>

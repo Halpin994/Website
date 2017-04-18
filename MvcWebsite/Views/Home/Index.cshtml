@@ -7,7 +7,7 @@
 <body>
     <br />
     <div align="center">
-        <img src="~/Content/Grad.jpg" style="width:178px;height:217px;">
+        <img src="~/Content/Grad.png" style="width:178px;height:217px;">
 
         <h3>Hi, my name is Conor!</h3>
 
@@ -23,19 +23,26 @@
 
     <fieldset>
         <legend>Comments</legend>
-        <input type="text" placeholder="Not yet implemented..." />
+        <fieldset>
+            <p>
+                Please enter a username and comment (Not yet implemented)
+            </p>
+            <input type="text" placeholder="Username..." />
+            <input type="text" placeholder="Comment..." />
+        </fieldset>
+        @foreach (var item in Model)
+        {
+            if (item.Webpage == "Index")
+            {
+                <fieldset>
+                    <b>@item.UserName:</b>
+                    @item.Comment
+                </fieldset>
+            }
+        }
     </fieldset>
 
-    @foreach (var item in Model)
-    {
-        if(item.Webpage == "Index")
-        {
-            <fieldset>
-                <b>@item.UserName:</b>
-                @item.Comment
-            </fieldset>
-        }
-    }
+
 
 </body>
 </html>

@@ -170,6 +170,8 @@ textarea {
 button,
 input {
   line-height: normal;
+  border-radius: 3px;
+  border:solid 1px grey;
 }
 
 button,
