@@ -188,9 +188,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\ContactMeStyle.css" />
-    <Content Include="Content\IndexStyle.css" />
-    <Content Include="Content\ProjectsStyle.css" />
+    <Content Include="Content\Grad.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
