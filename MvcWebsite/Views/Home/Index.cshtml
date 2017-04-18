@@ -1,33 +1,42 @@
 ﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
 
 <html>
+<head>
+    <title>@ViewBag.Title Conor Halpin</title>
+    <link href="~/Content/IndexStyle.css" rel="stylesheet" />
+</head>
 <body>
     <br />
-    <img src="http://puu.sh/vbdMV/11de5bb00c.jpg" alt="puu.sh" style="width:158px;height:216px;">
-    
-    <h3>Hi, my name is Conor!</h3>
+    <div align="center">
+        <img src="http://puu.sh/vbdMV/11de5bb00c.jpg" alt="puu.sh" style="width:158px;height:216px;">
 
-    <p>
-        Welcome to my slice of the internet.
-        I am an aspiring developer and I love video games.<br />
-        I have acquired a B.S honours degree in Computer Games Development from Institute of Technology Carlow.
-    </p>
-    <p>
-        Check out my projects page to see how I made this website.
-    </p>
+        <h3>Hi, my name is Conor!</h3>
 
-    <h4>Comments</h4>
+        <p>
+            Welcome to my slice of the internet.
+            I am an aspiring developer and I love video games.<br />
+            I have acquired a B.S honours degree in Computer Games Development from Institute of Technology Carlow.
+        </p>
+        <p>
+            Check out my projects page to see how I made this website.
+        </p>
+    </div>
+
+    <fieldset>
+        <legend>Comments</legend>
+        <input type="text" placeholder="Not yet implemented..." />
+    </fieldset>
 
     @foreach (var item in Model)
     {
         if(item.Webpage == "Index")
         {
-        <pre>
-<b>@item.UserName:</b>
-@item.Comment
-        </pre>
+            <fieldset>
+                <b>@item.UserName:</b>
+                @item.Comment
+            </fieldset>
         }
     }
-   
+
 </body>
 </html>

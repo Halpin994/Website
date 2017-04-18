@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/ContactMeStyle.css" rel="stylesheet" />
     <title>ContactMe</title>
 </head>
 <body>
@@ -18,16 +19,19 @@
         <p>Phone: 085 819 0879</p>
     </div>
 
-    <h4>Comments</h4>
+    <fieldset>
+        <legend>Comments</legend>
+        <input type="text" placeholder="Not yet implemented..." />
+    </fieldset>
 
     @foreach (var item in Model)
     {
         if (item.Webpage == "ContactMe")
         {
-            <pre>
-<b>@item.UserName:</b>
-@item.Comment
-            </pre>
+            <fieldset>
+                <b>@item.UserName:</b>
+                @item.Comment
+            </fieldset>
         }
     }
 

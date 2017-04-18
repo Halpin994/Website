@@ -1,0 +1,16 @@
+﻿body {
+}
+
+fieldset {
+    margin: 8px;
+    border: 1px solid silver;
+    padding: 8px;    
+    border-radius: 4px;
+}
+legend{
+    width:auto;
+    display:block;
+    padding: 1px;
+    border: hidden;
+    margin-bottom: 0px;
+}

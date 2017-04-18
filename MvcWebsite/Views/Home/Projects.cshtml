@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/ProjectsStyle.css" rel="stylesheet" />
     <title>Projects</title>
 </head>
 <body>
@@ -65,16 +66,19 @@
         </style><div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
     </div>
 
-    <h4>Comments</h4>
+    <fieldset>
+        <legend>Comments</legend>
+        <input type="text" placeholder="Not yet implemented..." />
+    </fieldset>
     
     @foreach (var item in Model)
     {
         if (item.Webpage == "Project")
         {
-            <pre>
-<b>@item.UserName:</b>
-@item.Comment
-            </pre>
+            <fieldset>
+                <b>@item.UserName:</b>
+                @item.Comment
+            </fieldset>
         }
     }
 
