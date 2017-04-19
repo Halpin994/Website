@@ -10,42 +10,67 @@
 <body>
     
     <div>
-        <h3>Projects</h3>
-        <br />
-        <h4>ASP.Net MVC Website <a href='http://conorhalpin.eu:8080/job/MvcWebsite/'><img src='http://35.161.104.133:8080/job/MvcWebsite/badge/icon'></a></h4>
-        <h5>• Automatic deployment system</h5>
+        <h2>Projects</h2>
+        <div align="center">
+            <h3>ASP.Net MVC Website <a href='http://conorhalpin.eu:8080/job/MvcWebsite/'><img src='http://35.161.104.133:8080/job/MvcWebsite/badge/icon'></a></h3>
+        </div>
+        <h4>• The Website</h4>
         <p>
-            In the beginning I created a basic website in Visual Studio using the MVC architecture pattern, C# and HTML.
-            This project was then pushed up to github which can be viewed <a href="https://github.com/Halpin994/Website">here</a>.<br />
+            I chose the MVC design pattern for my website as it seems to be very popular within the web developer industry. It also provides a number of advantages over the use of Web Forms. The MVC design pattern separates the components of the website into 3 parts called the Model, View and Controller.
+        </p>
+        <p><b>Model</b></p>
+        <p>
+            The Model represents the data inside the website. This website has a model for the comments. It defines a comment as an object that has an id, user name, name of the page (view) the comment was posted on and finally the comment itself. Models know nothing about the Views or Controllers. This is advantageous as the model can be reusable without modification. If the comments held a profile picture I could create a view that displays the comments with just usernames. I could also create a view which displays the comments with just a profile picture if it was requested by the project lead. This can be done without changing the comment model, making it very reusable.
+        </p>
+        <p><b>View</b></p>
+        <p>
+            The View represents the actual page we are looking at written in C# html. It determines how the page is displayed. It also sends user input to the controller. So If I am currently on the Index page and want to view the Projects page, I click the link to the Projects page. The view tells the controller to display the Projects view. The controller then provides us with the Project view. C# html supports server side code whereas raw html does not. Because of this, comments are loaded when the view is requested. They are not hard coded into the webpage.
+        </p>
+        <p><b>Controller</b></p>
+        <p>
+            The Controller provides the model data to the view. It also handles the user input which the view sends to it. The controller is dependent on the view and model. How it works with the model and view components: The controller is told load the Index page. It gets the comments and sends them to the view. Then displays the view.
+        </p>
+        <h4>• Automatic Deployment System</h4>
+        <p>
+            Having to manually deploy a website to a server each time a change is made is not efficient or necessary. I decided to automatically deploy the website because of this and it also seems to be a highly sought after skill.
+        </p>
+        <p><b>Github</b> - <a href="https://github.com/Halpin994/Website">Repo</a>.</p>
+        <p>
+            I began by creating a simple website using the MVC design pattern. I pushed this up to my github so it had a repository online which will be very important to this system later on. Github provides a number of useful services besides this, including the use of branches. Which are used to safely implement new features.
+        </p>
+        <p><b>Jenkins</b></p>
+        <p>
+            Jenkins is an automation service for continuous deployment which accelerates the development process. In the beginning I linked Jenkins to the location of MSBuild.exe on my local system so it can later build my project. I then created a job. Each job has its own workspace and is basically a list of tasks you want Jenkins to perform. The job is set to poll my github repo every 2 minutes to check for any changes. If a change is detected, the job will pull down the repo into the workspace folder specific to the job and attempt to build it using the solution file in the project and MSBuild.exe. This removes the need to use Visual Studio to build the project on a server for example. Jenkins had to be linked to the latest MSBuild provided with .Net v4.5 as my application uses .Net v4.5 features.
+        </p>
+        <p><b>IIS 7</b></p>
+        <p>
+            IIS 7 is a web server created by Microsoft. I use this to serve my website through a predefined port. An application pool was created in IIS which supports the use of .Net v4.0. I then added my site to the list of websites. It was set up by specifying the application pool I want to use and the physical path of my website. This was linked to the project in the Jenkins workspace and not the project located in my Visual Studio Projects folder. The application pool had to be set to enable 32 bit applications before it would serve my website successfully. I could now see my website through localhost:(port number) in my browser.
         </p>
         <p>
-            Jenkins was linked to MSBuild and then set up to poll my repository every 2 minutes for any changes. If a commit was added to the
-            repository, Jenkins would pull down the project and build it using MSBuild.
+            I tested the system by making a visible change to the website, pushing it up to my repo and waiting for Jenkins to detect it. After it detected the change, it pulled it down and built it. IIS was already pointing at the workspace so all I had to do then was refresh my page and I could see the change I made. Now that I knew I could successfully set the system up I decided to host the website somewhere else other than my own computer.
         </p>
+        <p><b>Amazon Web Services - EC2 server</b></p>
         <p>
-            I then installed IIS 7 and pointed it at the workspace folder Jenkins builds the website into.
-            The website would then automatically update through this set up whenever a change was made on the repository.
+            I chose to use amazon web services to host my website as they provide an EC2 server for free for the first year. The EC2 server is an external computer I can connect to and use through my computer. Once I had my EC2 server running I proceeded to install the latest .Net framework, Jenkins and IIS 7. These were set up the same as before. I then forwarded the ports which IIS is serving the website through and also the port which Jenkins is served through. This enables me to modify and view Jenkins services from my local machine provided I am signed in.
         </p>
+        <p><b>Downstream Project</b></p>
         <p>
-            Now that I knew I could get this system to work I created an Amazon Web Services account. Using this I could set up an EC2 server.
-            Once I had the EC2 server running I installed Jenkins and IIS 7 then set them up to work the same as on my local machine.
-            The port that IIS serves through and the port Jenkins can be accessed through were then opened.
+            A second job was created on Jenkins to build my website. A post build step was added to the first jenkins job to trigger the second job only if its build is successful. The second job does not poll my repo for changes. If the first job's build is successful, the second job pulls down the repo and builds it again into another workspace. IIS was then modified to point at this workspace to prevent an unsuccessful build from breaking the website. Now only the latest working build will be served.
         </p>
+        <p><b>Domain</b></p>
         <p>
-            The domain conorhalpin.eu was purchased and pointed at my EC2 servers ip and port which IIS is constantly serving through.
+            The domain conorhalpin.eu was purchased and then pointed at my EC2 servers IP address along with the port IIS is constantly serving the website through.
         </p>
+        <p><b>Jenkins Plugin</b></p>
         <p>
-            A second job was created on Jenkins so a post build step could be added to the first job. If the first job's build is successful,
-            the second job will build into another folder which IIS is now pointing to. As a result an unsuccessful build will no longer break the website.
-        </p>
-        <p>
-            The Jenkins build status for the first job is shown above.
-            This also links to the Jenkins job associated with the website, where the build history and changes can be seen.
+            A plugin was installed in Jenkins which enables me to embed the current build status of whatever job I choose. I used the first job for this because the status of the second will always be successful. If you click on the plugin at the top of this page you will be taken to the job page on Jenkins for my website. Here you can view the changes I have made through github commits and the build history.
         </p>
 
         <br />
-        <h4>The Academy - Final Year Project</h4>
-        <h5>• First person target shooting game</h5>
+        <div align="center">
+            <h3>The Academy - Final Year Project</h3>
+        </div>
+        <h4>• First person target shooting game</h4>
         <style>
             .embed-container {
                 position: relative;
@@ -69,10 +94,10 @@
         <legend>Comments</legend>
         <fieldset>
             <p>
-                Please enter a username and comment (Not yet implemented)
+                Please enter a username and comment
             </p>
-            <input type="text" placeholder="Username..." />
-            <input type="text" placeholder="Comment..." />
+            <input type="text" placeholder=" Username..." />
+            <input type="text" placeholder=" Comment..." />
         </fieldset>
         @foreach (var item in Model)
         {
