@@ -7,6 +7,7 @@ using System.Data.Entity;
 using MvcWebsite.Logger;
 using MvcWebsite.Settings;
 using MvcWebsite.MessageBroker;
+using MvcWebsite.Models;
 
 namespace MvcWebsite.Controllers
 {
@@ -28,6 +29,8 @@ namespace MvcWebsite.Controllers
             return View(allComments);
         }
 
+
+
         public ActionResult Projects()
         {
             var allComments = _messageBroker.GetComments();
@@ -41,6 +44,23 @@ namespace MvcWebsite.Controllers
             var allComments = _messageBroker.GetComments();
             _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Contact Me", Request.UserHostAddress));
             return View(allComments);
+
+        }
+
+        public ActionResult CreateComment()
+        {
+
+            return View();
+
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CreateComment(CommentModel commentToCreate)
+        {
+            commentToCreate.Webpage = "Index"; //hardcoded for now
+            _messageBroker.AddComment(commentToCreate);
+
+            return RedirectToAction("Index");
 
         }
     }

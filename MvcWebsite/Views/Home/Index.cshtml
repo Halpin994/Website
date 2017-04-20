@@ -1,45 +1,46 @@
-﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
+﻿
+@model IEnumerable<MvcWebsite.Models.CommentModel>
+   
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+        <title>@ViewBag.Title Conor Halpin</title>
+    </head>
+    <body>
+        <br />
+        <div align="center">
+            <img src="~/Content/Grad.png" style="width:178px;height:217px;">
 
-<html>
-<head>
-    <title>@ViewBag.Title Conor Halpin</title>
-</head>
-<body>
-    <br />
-    <div align="center">
-        <img src="~/Content/Grad.png" style="width:178px;height:217px;">
+            <h3>Hi, my name is Conor!</h3>
 
-        <h3>Hi, my name is Conor!</h3>
-
-        <p>
-            Welcome to my slice of the internet.
-            I am an aspiring developer and I love video games.<br />
-            I have acquired a B.S honours degree in Computer Games Development from Institute of Technology Carlow.
-        </p>
-        <p>
-            Check out my projects page to see how I made this website.
-        </p>
-    </div>
-
-    <fieldset>
-        <legend>Comments</legend>
-        <fieldset>
             <p>
-                Please enter a username and comment
+                Welcome to my slice of the internet.
+                I am an aspiring developer and I love video games.<br />
+                I have acquired a B.S honours degree in Computer Games Development from Institute of Technology Carlow.
             </p>
-            <input type="text" placeholder=" Username..." />
-            <input type="text" placeholder=" Comment..." />
-        </fieldset>
-        @foreach (var item in Model)
-        {
-            if (item.Webpage == "Index")
+            <p>
+                Check out my projects page to see how I made this website.
+            </p>
+        </div>
+
+        <fieldset>
+            <legend>Comments</legend>
+            <fieldset>
+                <p>
+                    @Html.ActionLink("Submit a comment", "CreateComment")
+                </p>
+            </fieldset>
+
+            @foreach (var item in Model)
             {
-                <fieldset>
-                    <b>@item.UserName:</b>
-                    @item.Comment
-                </fieldset>
+                if (item.Webpage == "Index")
+                {
+                    <fieldset>
+                        <b>@item.UserName: </b>@item.Comment
+                    </fieldset>
+                }
             }
-        }
-    </fieldset>
-</body>
+        </fieldset>
+
+    </body>
 </html>

@@ -225,6 +225,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Projects.cshtml" />
     <Content Include="Views\Home\ContactMe.cshtml" />
+    <Content Include="Views\Home\CreateComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
