@@ -1,0 +1,28 @@
+﻿@model MvcWebsite.Models.CommentModel
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateComment</title>
+</head>
+<body>
+
+    @using (Html.BeginForm("CreateComment", "Comment", FormMethod.Post))
+    {
+        <br />
+        <fieldset>
+            <legend>Comments</legend>
+
+            @Html.HiddenFor(c => c.Id)
+            @Html.HiddenFor(c => c.Webpage)
+
+            <p>Username</p>
+            <p>@Html.TextBoxFor(c => c.UserName)</p>
+            <p>Comment</p>
+            <p>@Html.TextBoxFor(c => c.Comment)</p>
+
+            <p><input type="submit" value="Submit" class="btn btn-default" /></p>
+        </fieldset>
+    }
+</body>
+</html>

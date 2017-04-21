@@ -11,6 +11,8 @@ namespace MvcWebsite.Settings
         public string logPath { get; private set; }
         public string hostUri { get; private set; }
         public string commentApiPath { get; private set; }
+        public string lastView { get; set; }
+        public string lastController { get; set; }
 
         public WebsiteSettings()
         {

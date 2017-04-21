@@ -115,19 +115,14 @@
     <fieldset>
         <legend>Comments</legend>
         <fieldset>
-            <p>
-                Please enter a username and comment
-            </p>
-            <input type="text" placeholder=" Username..." />
-            <input type="text" placeholder=" Comment..." />
+                @Html.ActionLink("Submit a comment", "CreateComment", "Comment", new { fromView = "Projects", fromController = "Projects" }, null)
         </fieldset>
         @foreach (var item in Model)
         {
-            if (item.Webpage == "Project")
+            if (item.Webpage == "Projects")
             {
                 <fieldset>
-                    <b>@item.UserName:</b>
-                    @item.Comment
+                    <b>@item.UserName: </b>@item.Comment
                 </fieldset>
             }
         }

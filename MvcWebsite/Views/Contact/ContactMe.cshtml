@@ -11,29 +11,23 @@
     <div>
         <h3>Contact Me</h3>
         <p>
-        <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-        <script type="IN/MemberProfile" data-id="https://www.linkedin.com/in/halpinconor" data-format="hover" data-related="false" data-text="Conor Halpin"></script>
+            <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+            <script type="IN/MemberProfile" data-id="https://www.linkedin.com/in/halpinconor" data-format="click" data-related="false" data-text="Conor Halpin"></script>
         </p>
         <p>Email: conorhalpin@outlook.com</p>
-        <p>Phone: 085 000 0000</p>
     </div>
 
     <fieldset>
         <legend>Comments</legend>
         <fieldset>
-            <p>
-                Please enter a username and comment
-            </p>
-            <input type="text" placeholder=" Username..." />
-            <input type="text" placeholder=" Comment..." />
+                @Html.ActionLink("Submit a comment", "CreateComment", "Comment", new { fromView = "ContactMe", fromController = "Contact" }, null)
         </fieldset>
         @foreach (var item in Model)
         {
             if (item.Webpage == "ContactMe")
             {
                 <fieldset>
-                    <b>@item.UserName:</b>
-                    @item.Comment
+                    <b>@item.UserName: </b>@item.Comment
                 </fieldset>
             }
         }

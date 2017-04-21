@@ -26,9 +26,7 @@
         <fieldset>
             <legend>Comments</legend>
             <fieldset>
-                <p>
-                    @Html.ActionLink("Submit a comment", "CreateComment")
-                </p>
+                    @Html.ActionLink("Submit a comment", "CreateComment", "Comment", new { fromView = "Index", fromController = "Home"}, null)
             </fieldset>
 
             @foreach (var item in Model)
@@ -41,6 +39,7 @@
                 }
             }
         </fieldset>
-
     </body>
 </html>
+
+
