@@ -6,6 +6,7 @@ using System.Web;
 using System.Net.Http;
 using MvcWebsite.Models;
 using MvcWebsite.Settings;
+using System.Threading.Tasks;
 
 namespace MvcWebsite.MessageBroker
 {
@@ -26,16 +27,28 @@ namespace MvcWebsite.MessageBroker
             client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentApiPath);
             return client;
         }
- 
- 
+
+        public IEnumerable<CommentModel> GetPageComments(string pageFilter)
+        {
+            return GetComments().Where(comment => comment.Webpage.Equals(pageFilter));
+        }
+
         public IEnumerable<CommentModel> GetComments()
         {
-            HttpResponseMessage response;
-            using (var client = CreateClient())
+            IEnumerable<CommentModel> result = new List<CommentModel>();
+            try
             {
-                response = client.GetAsync(client.BaseAddress).Result;
+                HttpResponseMessage response;
+                using (var client = CreateClient())
+                {
+                    response = client.GetAsync(client.BaseAddress).Result;
+                }
+                result = response.Content.ReadAsAsync<IEnumerable<CommentModel>>().Result;
             }
-            var result = response.Content.ReadAsAsync<IEnumerable<CommentModel>>().Result;
+            catch(Exception e)
+            {
+                //Log exception
+            }
             return result;
         }
  

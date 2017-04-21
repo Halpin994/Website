@@ -20,17 +20,9 @@
     <fieldset>
         <legend>Comments</legend>
         <fieldset>
-                @Html.ActionLink("Submit a comment", "CreateComment", "Comment", new { fromView = "ContactMe", fromController = "Contact" }, null)
+                @{Html.RenderPartial("~/Views/Comment/CreateComment.cshtml", new MvcWebsite.Models.CommentModel("ContactMe"));}
         </fieldset>
-        @foreach (var item in Model)
-        {
-            if (item.Webpage == "ContactMe")
-            {
-                <fieldset>
-                    <b>@item.UserName: </b>@item.Comment
-                </fieldset>
-            }
-        }
+        @{Html.RenderPartial("~/Views/Comment/CommentList.cshtml");}
     </fieldset>
 
 </body>

@@ -21,9 +21,9 @@ namespace MvcWebsite.Controllers
 
         public ActionResult ContactMe()
         {
-            var allComments = _messageBroker.GetComments();
+            var pageComments = _messageBroker.GetPageComments("ContactMe");
             _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Contact Me", Request.UserHostAddress));
-            return View(allComments);
+            return View(pageComments);
 
         }
     }

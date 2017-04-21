@@ -12,6 +12,7 @@ namespace MvcWebsite.MessageBroker
     public interface IMessageBrokerApi
     {
         HttpClient CreateClient();
+        IEnumerable<CommentModel> GetPageComments(string pageFilter);
         IEnumerable<CommentModel> GetComments();
         CommentModel GetComment(int id);
         System.Net.HttpStatusCode AddComment(CommentModel comment);

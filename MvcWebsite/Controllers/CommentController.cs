@@ -12,20 +12,16 @@ namespace MvcWebsite.Controllers
 {
     public class CommentController : Controller
     {
-        ISettings _settings;
         ILogger _logger;
         IMessageBrokerApi _messageBroker;
-        public CommentController(ILogger textLogger, IMessageBrokerApi messageBroker, ISettings settings)
+        public CommentController(ILogger textLogger, IMessageBrokerApi messageBroker)
         {
-            _settings = settings;
             _logger = textLogger;
             _messageBroker = messageBroker;
         }
 
-        public ActionResult CreateComment(string fromView, string fromController)
+        public ActionResult CreateComment()
         {
-            _settings.lastView = fromView;
-            _settings.lastController = fromController;
             _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Create Comment", Request.UserHostAddress));
             return View();
         }
@@ -33,10 +29,19 @@ namespace MvcWebsite.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateComment(CommentModel commentToCreate)
         {
-            commentToCreate.Webpage = _settings.lastView;
             _messageBroker.AddComment(commentToCreate);
 
-            return RedirectToAction(_settings.lastView, _settings.lastController);
+            switch(commentToCreate.Webpage)
+            {
+                case "Index":
+                    return RedirectToAction(commentToCreate.Webpage,"Home");
+                case "Projects":
+                    return RedirectToAction(commentToCreate.Webpage,"Projects");
+                case "ContactMe":
+                    return RedirectToAction(commentToCreate.Webpage,"Contact");
+                default:
+                    return RedirectToAction("Index","Home");
+            }
         }
     }
 }

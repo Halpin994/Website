@@ -18,21 +18,6 @@ namespace MvcWebsite
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-            routes.MapRoute(
-                name: "ProjectRoute",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Projects", action = "Projects", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
-                name: "ContactRoute",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Contact", action = "ContactMe", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
-                name: "CommentRoute",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Comment", action = "CreateComment", id = UrlParameter.Optional }
-            );
         }
     }
 }

@@ -12,5 +12,12 @@ namespace MvcWebsite.Models
         public string UserName { get; set; }
         public string Webpage { get; set; }
         public string Comment { get; set; }
+
+        public CommentModel(){}
+
+        public CommentModel(String webpage)
+        {
+            this.Webpage = webpage;
+        }
     }
 }

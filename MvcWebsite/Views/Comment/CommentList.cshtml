@@ -1,0 +1,8 @@
+﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
+
+@foreach (var item in Model)
+{
+    <fieldset>
+        <b>@item.UserName: </b>@item.Comment
+    </fieldset>
+}
