@@ -759,8 +759,8 @@ pre code {
 }
 
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0px;
+  padding-left: 0px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -1636,16 +1636,16 @@ table th[class*="col-"] {
 }
 
 fieldset {
-    margin: 8px;
+    margin: 4px;
     border: 1px solid silver;
-    padding: 8px;    
+    padding: 6px;    
     border-radius: 4px;
 }
 
 legend {
   display: block;
   width:auto;
-  padding: 1px;
+  padding: 0px;
   margin-bottom: 0px;
   font-size: 21px;
   line-height: inherit;

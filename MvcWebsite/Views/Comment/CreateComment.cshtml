@@ -2,13 +2,15 @@
 
 @using (Html.BeginForm("CreateComment", "Comment", FormMethod.Post, new { id = "commentForm" }))
 {
-        @Html.HiddenFor(c => c.Id)
-        @Html.HiddenFor(c => c.Webpage)
+    <fieldset>
+        @Html.HiddenFor(newComment => newComment.Id)
+        @Html.HiddenFor(newComment => newComment.Webpage)
 
         <p>Username</p>
-        <p>@Html.TextBoxFor(c => c.UserName)</p>
+        <p>@Html.TextBoxFor(newComment => newComment.UserName, new { style = "width:100%", @maxlength = "14" })</p>
         <p>Comment</p>
-        <p>@Html.TextBoxFor(c => c.Comment)</p>
+        <p>@Html.TextBoxFor(newComment => newComment.Comment, new { style = "width:100%", @maxlength = "500" })</p>
 
         <p><input type="submit" value="Submit" class="btn btn-default" /></p>
+    </fieldset>
 }

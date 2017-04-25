@@ -22,9 +22,7 @@
 
     <fieldset>
         <legend>Comments</legend>
-        <fieldset>
-                @{Html.RenderPartial("~/Views/Comment/CreateComment.cshtml", new MvcWebsite.Models.CommentModel("ContactMe"));}
-        </fieldset>
+        @{Html.RenderPartial("~/Views/Comment/CreateComment.cshtml", new MvcWebsite.Models.CommentModel("ContactMe"));}
         @{Html.RenderPartial("~/Views/Comment/CommentList.cshtml");}
     </fieldset>
 
