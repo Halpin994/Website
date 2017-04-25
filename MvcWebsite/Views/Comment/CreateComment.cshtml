@@ -1,11 +1,5 @@
 ﻿@model MvcWebsite.Models.CommentModel
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="~/Scripts/jquery-disableformsubmit.js"></script>
-    <title>CreateComment</title>
-</head>
-
 @using (Html.BeginForm("CreateComment", "Comment", FormMethod.Post, new { id = "commentForm" }))
 {
         @Html.HiddenFor(c => c.Id)

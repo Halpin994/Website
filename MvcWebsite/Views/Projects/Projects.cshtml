@@ -17,22 +17,22 @@
             <p style="padding: 10px; background-color: #333333; color: white; border: #111111 2px solid; font-size:22px; border-radius: 3px 4px">
                 ASP.NET MVC Website
             </p>
-                <h4>• The Website <a href='http://conorhalpin.eu:8080/job/MvcWebsite/'><img src='http://35.161.104.133:8080/job/MvcWebsite/badge/icon'></a></h4>
+            <h4>• The Website <a href='http://conorhalpin.eu:8080/job/MvcWebsite/'><img src='http://35.161.104.133:8080/job/MvcWebsite/badge/icon'></a></h4>
         </div>
         <p>
             This website was built in order to practice .NET web development, backend development and showcase my work. I chose the MVC design pattern for my website as it seems to be very popular and in demand at the moment. It also provides a number of advantages over the use of other design patterns. The MVC design pattern separates the components of the website into 3 parts called the Model, View and Controller. I started out by completing a Movie Database tutorial. From there I started building my website and deleted any items associated with the Movie DB which I no longer needed.
         </p>
         <p><b>Model</b></p>
         <p>
-            The Model represents the data inside the website. This website has a model for the comments. It defines a comment as an object that has an id, user name, name of the page (view) the comment was posted on and finally the comment itself. Models know nothing about the Views or Controllers. This is advantageous as the model can be reusable without modification. If the comments held a profile picture I could create a view that displays the comments with just usernames. I could also create a view which displays the comments with just a profile picture if it was requested by the project lead. This can be done without changing the comment model, making it very reusable.
+            The Model represents the data inside the website, it is written in C#. This website has a model for the comments. It defines a comment as an object that has an id, user name, name of the page (view) the comment was posted on and finally the comment itself. Models know nothing about the Views or Controllers. This is advantageous as the model can be reusable without modification. If the comments held a profile picture I could create a view that displays the comments with just usernames. I could also create a view which displays the comments with just a profile picture if it was requested by the project lead. This can be done without changing the comment model, making it very reusable.
         </p>
         <p><b>View</b></p>
         <p>
-            The View represents the actual page we are looking at written in C# html. It determines how the page is displayed. It also sends user input to the controller. So If I am currently on the Index page and want to view the Projects page, I click the link to the Projects page. The view tells the controller to display the Projects view. The controller then provides us with the Project view. C# html supports server side code whereas raw html does not. Because of this, comments are loaded when the view is requested. They are not hard coded into the webpage.
+            The View represents the actual page we are looking at written in cshtml which is kind of a mashup of C# and HTML. It determines how the page is displayed. It also sends user input to the controller. So If I am currently on the Index page and want to view the Projects page, I click the link to the Projects page. The view tells the controller to display the Projects view. The controller then provides us with the Project view. C# html supports server side code whereas raw html does not. Because of this, comments are loaded when the view is requested. They are not hard coded into the webpage.
         </p>
         <p><b>Controller</b></p>
         <p>
-            The Controller provides the model data to the view. It also handles the user input which the view sends to it. The controller is dependent on the view and model. How it works with the model and view components: The controller is told load the Index page. It gets the comments and sends them to the view. Then displays the view.
+            The Controller provides the model data to the view, it is written in C#. It also handles the user input which the view sends to it. The controller is dependent on the view and model. How it works with the model and view components: The controller is told load the Index page. It gets the comments and sends them to the view. Then displays the view.
         </p>
         <div align="center"><h4>• Automatic Deployment System</h4></div>
         <p>
@@ -76,13 +76,68 @@
             A plugin was installed in Jenkins which enables me to embed the current build status of whatever job I choose. I used the first job of the website for the website plugin because the status of the second will always be successful. If you click on the plugin at the top of this page you will be taken to the job page associated with the website. You can also see and click the plugin for the Message Broker service below. There you can view the changes I have made through github commits and the build history.
         </p>
         <div align="center"><h4>• Dependancy Injection</h4></div>
-        <p>...</p>
+        <p>
+            In Dependancy Injection a dependancy is just another class that an object requires to function. The dependancies are instantiated in a container and then injected into the object which requires it. This avoids having to instantiate the dependacy inside the object which requires it every time it is used, thus decoupling the object from it's dependancy. Now, when using this object in multiple places in my code, the dependancies are not created each time it is used. The object checks the container to see if the dependancy is already created, it then gets the dependancy injected into it for use.
+        </p>
+        <p><b>Autofac</b></p>
+        <p>
+            Autofac is an inversion of control container for .Net which manages the dependacies of classes so that my website can stay easy to change as it grows in size and complexity. I installed the Autofac package through Nuget package manager console in Visual Studio. The command is simply "Install-Package Autofac".
+        <p />
         <p><b>Interfaces</b></p>
-        <p>...</p>
-        <p><b>Settings</b></p>
-        <p>...</p>
+        <p>
+            Instead of using a class, I use interfaces for each object. This is because the interface can be used without knowing how it is being used. It can have multiple dependancies. As long as the dependancy satisfies the requirements of the interface, it can be used. This allows for easily adjustable code.
+        </p>
+        <p>
+            Let's say our interface is the interface on a drinks machine which has no glass on it. As long as we know how to use the interface we can operate the drinks machine without knowing how it works. You put your money in, push a button to indicate which drink you want and the machine will give it to you. The dependancy of this interface is what determines how the machine works behind the interface. The operator of the interface does not know how it works behind the interface, it doesn't matter to the operator. This is what is called decoupling. The dependancy could just be a robot that counts your money, checks which button you pressed and grabs the drink you want then puts it in the tray. Maybe we don't like how that works and want to test a different method of getting the drinks. Let's say we have another location for the exotic drinks on the interface. Instead of changing how the dependancy works to get the drinks. We can just use another dependancy to tell the robot to get certain drinks from another location. It still doesn't matter to the operator of the interface how the drink is delivered to them, as long as they can use the interface, the machine will decide itself how to get the drink based on its dependancies.
+        </p>
+        <div align="center"><h4>• Settings</h4></div>
+        <p>
+            Settings are used to store and get the location of certains things such as the path to the log file on my computer which I want to write logs to.
+        </p>
+        <p>
+            To create the settings object I created an interface called "ISettings". This contains a getter for strings I want. I then created the "WebsiteSettings" class which inherits the ISettings interface and also sets the strings. I put the definition of each string inside the web config file in my project so if I want/need to change one I don't need to change the code and build the entire project again.
+        </p>
+        <p>
+            Inside the Startup class is where Autofac works. Here I create a container builder.
+        </p>
+        <fieldset>
+            var builder = new ContainerBuilder();
+        </fieldset>
+        <p>
+            I then register the controllers and types like so.
+        </p>
+        <fieldset>
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterType<textlogger>().As<ilogger>().SingleInstance();
+        </fieldset>
+        <p>
+            Finally I set the containers contents to the built instances of each type. The dependacny resolver is then set to Autofac.
+        </p>
+        <fieldset>
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        </fieldset>
+        <br />
         <div align="center"><h4>• Logger</h4></div>
-        <p>...</p>
+        <p>
+            The logger is set up the same as the settings except it doesn't hold strings. It has a Log(string input) method in its interface which takes a string parameter. This string will be passed when used inside a controller to determine what is logged. Inside the ILogger's dependancy which is called "TextLogger" we use the ISettings interface to get the log file path from the webconfig using it's WebsiteSettings dependancy. Here, the settings are taken from the instance in the container and not created inside this class.
+        </p>
+        <p>
+            Inside our ILogger dependancy we determine how the Log(string input) method works. I used a streamwriter which takes a parameter of the location of the log file. This is where I used the settings interface to get "settings.logPath". Now, "streamWriter.WriteLine(input);" can be used to log a line to the file inside the Log(string input) method. I had some difficulties getting the streamWriter to write on seperate lines each time but putting "streamWriter.Close();" inside the method seemed to fix that.
+        </p>
+        <p>
+            Now after getting the instance of the logger inside a controller we can use the following line of code to write text to the log file.
+        </p>
+        <fieldset>
+            _logger.Log();
+        </fieldset>
+        <p>
+            I decided to log the time, page and IP address of each visit to my website using the following line of code in each page's controller (this specific one is for the Projects page)
+        </p>
+        <fieldset>
+            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress)
+        </fieldset>
+        <br />
         <div align="center"><h4>• Comment System</h4></div>
         <p>...</p>
         <p><b>Comment Model</b></p>
@@ -91,7 +146,7 @@
         <p>...</p>
         <p><b>Message Broker Api</b></p>
         <p>...</p>
-        
+
         <br />
         <div align="center">
             <p style="padding: 10px; background-color: #333333; color: white; border: #111111 2px solid; font-size:22px; border-radius: 3px 4px">
@@ -108,14 +163,16 @@
                 max-width: 100%;
             }
 
-                .embed-container iframe, .embed-container object, .embed-container embed {
+                .embed-container iframe,
+                .embed-container object, .embed-container embed {
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
                 }
-        </style><div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
+        </style>
+        <div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
     </div>
 
     <fieldset>
