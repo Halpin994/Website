@@ -1,24 +1,10 @@
 ﻿@model IEnumerable<MvcWebsite.Models.CommentModel>
 
-<style type="text/css">
-    .left {
-        float: left;
-        width: 12%;
-        text-align:right;
-    }
-
-    .right {
-        float: right;
-        width: 87%;
-    }
-</style>
-
 @foreach (var item in Model)
 {
     <fieldset>
-    <div class="container">
-        <div class="left"><b>@item.UserName:</b></div>
-        <div class="right">@item.Comment</div>
-    </div>
+            <b>@item.UserName: </b>@item.Comment
     </fieldset>
 }
+
+
