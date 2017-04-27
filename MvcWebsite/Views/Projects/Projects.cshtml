@@ -14,7 +14,9 @@
             <fieldset>
                 <h3>Projects</h3>
             </fieldset>
-            <br />
+            <p>
+                (Code snippets will not display correctly for mobile viewers as the screen is too small, resulting in line breaks)
+            </p>
             <p style="padding: 10px; background-color: #333333; color: white; border: #111111 2px solid; font-size:22px; border-radius: 3px 4px">
                 ASP.NET MVC Website
             </p>
@@ -128,7 +130,7 @@ DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         <p>
             Here is an example of my Settings interface.
         </p>
-            <pre style="word-wrap:break-word">
+        <pre style="word-wrap:break-word">
 namespace MvcWebsite.Settings
 {
     public interface ISettings
@@ -140,9 +142,9 @@ namespace MvcWebsite.Settings
 }
             </pre>
         <p>
-            As you can see the interface has nothing to do with how it gets these strings, this is determined by it's dependancy. The WebsiteSettings class.
+            As you can see the interface has nothing to do with how it gets these strings, this is determined by the class implementing the interface.
         </p>
-            <pre style="word-wrap:break-word">
+        <pre style="word-wrap:break-word">
 using System.Configuration;
                 
 namespace MvcWebsite.Settings
@@ -182,13 +184,11 @@ namespace MvcWebsite.Settings
         </p>
         <pre style="word-wrap:break-word">
 using MvcWebsite.Settings;
-
 namespace MvcWebsite.Logger
 {
     public class TextLogger : ILogger
     {
         private ISettings settings;
-
         public TextLogger(ISettings webSiteSettings)
         {
             settings = webSiteSettings;
@@ -241,9 +241,7 @@ public class CommentModel
     public string UserName { get; set; }
     public string Webpage { get; set; }
     public string Comment { get; set; }
-
     public CommentModel(){}
-
     public CommentModel(String webpage)
     {
         this.Webpage = webpage;
@@ -254,16 +252,14 @@ public class CommentModel
         <p>
             The message broker service consists of a webserver class shown below. This is used to stop and start the service. To get this working I had to get the NuGet package Microsoft.Owin.SelfHost. The port the service is run on will be used later in the MessageBrokerApi class in the website project to allow communication between the website and the service.
         </p>
-            <pre style="word-wrap:break-word">
+        <pre style="word-wrap:break-word">
 using Microsoft.Owin.Hosting;
-
 public class Webserver
 {
     private IDisposable _webApp;
-
     public void Start()
     {
-        _webApp = WebApp.Start<Startup>("http://localhost:8888");
+        _webApp = WebApp.Start<startup>("http://localhost:8888");
     }
     public void Stop()
     {
@@ -290,23 +286,17 @@ public class Webserver
         <p>
             The second job doesn't build the project, so it's workspace only contains two VBScripts which I use to manage the bin folder in the first jobs workspace. The first script is a zip script so I can zip up the bin folder.
         </p>
-            <pre style="word-wrap:break-word">
+        <pre style="word-wrap:break-word">
 'Get command-line arguments.
 Set objArgs = WScript.Arguments
 InputFolder = objArgs(0)
 ZipFile = objArgs(1)
-
 Const OverwriteExisting = TRUE
-
 'Create empty ZIP file.
 CreateObject("Scripting.FileSystemObject").CreateTextFile(ZipFile, True).Write "PK" & Chr(5) & Chr(6) & String(18, vbNullChar)
-
 Set objShell = CreateObject("Shell.Application")
-
 Set source = objShell.NameSpace(InputFolder)
-
 objShell.NameSpace(ZipFile).CopyHere(source)
-
 'Required!
 wScript.Sleep 2000
             </pre>
@@ -329,20 +319,17 @@ CScript zip.vbs "C:\Program Files (x86)\Jenkins\workspace\MessageBroker\MessageB
         </p>
         <p>
             Now I can begin installing the newly built service. For this I need to use a new script to unzip the bin file inside the brokerstorage folder. This is the script that is used to unzip the file.
-        <pre style="word-wrap:break-word">
+            <pre style="word-wrap:break-word">
 'Get command-line arguments.
 Set objArgs = WScript.Arguments
 ZipFile = objArgs(0)
 ExtractTo = objArgs(1)
-
 Set fso = CreateObject("Scripting.FileSystemObject")
 sourceFile = fso.GetAbsolutePathName(ZipFile)
 destFolder = fso.GetAbsolutePathName(ExtractTo)
-
 Set objShell = CreateObject("Shell.Application")
 Set FilesInZip=objShell.NameSpace(sourceFile).Items()
 objShell.NameSpace(destFolder).copyHere FilesInZip, 16
-
 Set fso = Nothing
 Set objShell = Nothing
 Set FilesInZip = Nothing
@@ -351,7 +338,7 @@ Set FilesInZip = Nothing
             <pre style="word-wrap:break-word">
 CScript unzip.vbs "C:\BrokerStorage\MessageBroker.zip" "C:\BrokerRun"
             </pre>
-           The last two steps are used to safely install the service
+            The last two steps are used to safely install the service
             <pre style="word-wrap:break-word">
 C:\BrokerRun\bin\Debug\MessageBroker.exe" install
             </pre>
@@ -362,22 +349,173 @@ C:\BrokerRun\bin\Debug\MessageBroker.exe" install
             That's it. Now my message broker will be automatically deployed as a service, server side, each time a change is made to its github repo.
         </p>
         <p><b>Message Broker Api</b></p>
-        <p>...</p>
-        <p><b>Comment Controller</b></p>
-        <p>...</p>
-        <p><b>Create Comment View</b></p>
-        <p>...</p>
-        <p><b>Comment List View</b></p>
+
+        The message broker api is used to communicate with the message broker service. It is set up just like the settings and logger classes using an insterface and registering its type.
         <p>
-            Inside each pages controller we get the comments for that page and return them to the view to be displayed. This expample is specific to the projects page.
+            I use my settings instance to get the Uri address which my service runs at on the server.
+        </p>
+        <pre style="word-wrap:break-word">
+public class MessageBrokerApi : IMessageBrokerApi
+    {
+        private ISettings settings;
+        public MessageBrokerApi(ISettings webSiteSettings) //aka CommentClient()
+        {
+            settings = webSiteSettings;
+        }
+        </pre>
+        Now I can create the client, give it the Uri address and the location of the comments stored in memory on the service.
+        <pre style="word-wrap:break-word">
+public HttpClient CreateClient()
+    {
+        var client = new HttpClient();
+        client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentApiPath);
+        return client;
+    }
+        </pre>
+        These values are stored in the Web.config file like so
+        <pre style="word-wrap:break-word">
+&lt;add key="HostUri" value="http://localhost:8888" />
+&lt;add key="commentApiPath" value="api/comments/" />
+        </pre>
+        Next I created a GetComments() method to get all the comments on the service. There is a try catch set up around it so when I was testing other features in the website I didn't have to have the message broker running. Without this the site would crash if it couldn't get the comments.
+        <pre style="word-wrap:break-word">
+public IEnumerable&lt;commentmodel> GetComments()
+{
+    IEnumerable&lt;CommentModel> result = new List&lt;CommentModel>();
+    try
+    {
+        HttpResponseMessage response;
+        using (var client = CreateClient())
+        {
+            response = client.GetAsync(client.BaseAddress).Result;
+        }
+        result = response.Content.ReadAsAsync&lt;IEnumerable&lt;CommentModel>>().Result;
+    }
+    catch(Exception e)
+    {
+        //Log exception
+    }
+    return result;
+}
+</pre>
+        All this does is uses this method in the service to get all the comments in the list.
+        <pre style="word-wrap:break-word">
+public IEnumerable&lt;CommentModel> Get()
+{
+    return _Db;
+}
+        </pre>
+        I added another method called GetPageComments() to the api so I could just get the comments for certain pages passed without passing all the comment and sorting them in the view.
+        <pre style="word-wrap:break-word">
+public IEnumerable&lt;commentmodel> GetPageComments(string pageFilter)
+{
+    return GetComments().Where(comment => comment.Webpage.Equals(pageFilter));
+}
+        </pre>
+        In the ProjectsController I can now use this line to get that pages comments.
+        <pre style="word-wrap:break-word">
+var pageComments = _messageBroker.GetPageComments("Projects");
+</pre>
+        All thats left to do is add the AddComment() method to the api and a Post() method to the message broker service and we can start posting comments once our Comment Controller is set up. The method looks like this.
+        <pre>
+public System.Net.HttpStatusCode AddComment(CommentModel comment)
+{
+    HttpResponseMessage response;
+    using (var client = CreateClient())
+    {
+        response = client.PostAsJsonAsync(client.BaseAddress, comment).Result;
+    }
+    return response.StatusCode;
+}
+</pre>
+        This communicates with the following Post method inside the Message Broker service.
+        <pre class="word-wrap:break-word">
+public IHttpActionResult Post(CommentModel comment)
+        {
+            if(comment == null)
+            {
+                return BadRequest("Argument Null");
+            }
+            comment.Id = _Db.Last().Id + 1;
+            var commentExists = _Db.Any(c => c.Id == comment.Id);
+            
+            if(commentExists)
+            {
+                return BadRequest("Exists");
+            }
+            Console.WriteLine(String.Format("Id={0} WebPage={1} UserName={2} Comment={3}", comment.Id, comment.Webpage, comment.UserName, comment.Comment));
+            
+            _Db.Add(comment);
+            return Ok();
+        }
+</pre>
+        <p>
+            All this does is takes in the comment if its not null, adds 1 to the id and adds it to the database. There is also a simple line to output the comment to the console when running the messagebroker.exe and not as a service. This was used for debugging purposes when comments were coming through as null.
+        </p>
+        <p><b>Comment Controller</b></p>
+        <p>
+        Besides the constructor getting the instances of the Logger and message broker api. All the comment controller contains for now is a CreateComment() method which looks like this.
+            <pre class="word-wrap:break-word">
+[AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CreateComment(CommentModel commentToCreate)
+        {
+            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}, UserNameSubmitted={3}, CommentSubmitted={4}.", 
+            DateTime.Now, "Create Comment", Request.UserHostAddress,commentToCreate.UserName.ToString(), commentToCreate.Comment.ToString()));
+
+            _messageBroker.AddComment(commentToCreate);
+            switch(commentToCreate.Webpage)
+            {
+                case "Index":
+                    return RedirectToAction(commentToCreate.Webpage,"Home");
+                case "Projects":
+                    return RedirectToAction(commentToCreate.Webpage,"Projects");
+                case "ContactMe":
+                    return RedirectToAction(commentToCreate.Webpage,"Contact");
+                default:
+                    return RedirectToAction("Index","Home");
+            }
+        }
+</pre>
+            This uses the AddComment() method in the api to post the comment to the service. Then I have a switch case set up so when a comment is posted it will check the webpage value of the comment that was just submitted and then redirect the user to the page they are on. So it basically just refreshes the page so the user can see their newly submitted comment.
+        </p>
+        <p><b>Create Comment View</b></p>
+            The create comment view is a html form with two text boxes for Username and Comment. I have set character limits on both.
             <pre style="word-wrap:break-word">
+&#x40;model MvcWebsite.Models.CommentModel
+&#x40;using (Html.BeginForm("CreateComment", "Comment", FormMethod.Post, new { id = "commentForm" }))
+{
+        &lt;fieldset>
+        &#x40;Html.HiddenFor(newComment => newComment.Id)
+        &#x40;Html.HiddenFor(newComment => newComment.Webpage)
+        &lt;p>Username&lt;/p>
+        &lt;p>&#x40;Html.TextBoxFor(newComment => newComment.UserName, new { style = "width:100%", &#x40;maxlength = "14" })&lt;/p>
+        &lt;p>Comment&lt;/p>
+        &lt;p>&#x40;Html.TextBoxFor(newComment => newComment.Comment, new { style = "width:100%", &#x40;maxlength = "250" })&lt;/p>
+        &lt;p>&lt;input type="submit" value="Submit" class="btn btn-default" />&lt;/p>
+        &lt;/fieldset>
+}
+            </pre>
+            As you can see I am using lambda functions which use the "=>" operator to simplify the code. The compiler figures out the return type and the param type automatically because the HTML helper passes the model and property type to the HTML.TextBoxFor() method. When the submit button is hit, I use the CreateComment() method inside the comment controller to send the comment to my message broker api. Which then posts it to the message broker application to be submitted into the list of comments stored in memory in the service.
+            <p>
+                In each view we use this line of code to render the create comment view inside the page. This one is specific for the Projects page. As we can see, the string "Projects" is passed to be used by the comment model constructor to set the webpage the comment is submitted on.
+                <pre style="word-wrap:break-word">
+&#x40;{Html.RenderPartial("~/Views/Comment/CreateComment.cshtml", new MvcWebsite.Models.CommentModel("Projects"));}
+                </pre>
+                When rendering the create comment view on the contact me page for example the code would simply be
+                <pre style="word-wrap:break-word">
+&#x40;{Html.RenderPartial("~/Views/Comment/CreateComment.cshtml", new MvcWebsite.Models.CommentModel("ContactMe"));}
+                </pre>
+            </p>
+<p><b>Comment List View</b></p>
+<p>
+    Inside each pages controller we get the comments for that page and return them to the view to be displayed. This expample is specific to the projects page.
+    <pre style="word-wrap:break-word">
 var pageComments = _messageBroker.GetPageComments("Projects");
 return View(pageComments);
             </pre>
-            This is what the actual view for the CommentList looks like. As you can see all it does is lists out each comments Username and Comment. It doesn't need to sort which comments it needs as they have already been sorted in the message broker.
-            <pre style="word-wrap:break-word">
+    This is what the actual view for the CommentList looks like. As you can see all it does is lists out each comments Username and Comment. It doesn't need to sort which comments it needs as they have already been sorted in the message broker. I define the model the view accepts at the top as shown. It uses the IEnumerable type so I can use the foreach operator.
+    <pre style="word-wrap:break-word">
 &#x40;model IEnumerable&lt;MvcWebsite.Models.CommentModel>
-
 &#x40;foreach (var item in Model)
 {
     &lt;fieldset>
@@ -385,38 +523,40 @@ return View(pageComments);
     &lt;/fieldset>
 }
             </pre>
-            Finally, inside the project view we use the following line of code to render the comment list view inside the projects page.
-            <pre style="word-wrap:break-word">
+    Finally, inside the project view we use the following line of code to render the comment list view inside the projects page.
+    <pre style="word-wrap:break-word">
 &#x40;{Html.RenderPartial("~/Views/Comment/CommentList.cshtml");}
             </pre>
-        </p>
-        <br />
-        <div align="center">
-            <p style="padding: 10px; background-color: #333333; color: white; border: #111111 2px solid; font-size:22px; border-radius: 3px 4px">
-                The Academy - Final Year Project
-            </p>
-        </div>
-        <div align="center"><h4>• First person target shooting game</h4></div>
-        <style>
-            .embed-container {
-                position: relative;
-                padding-bottom: 56.25%;
-                height: 0;
-                overflow: hidden;
-                max-width: 100%;
-            }
+</p>
+<br />
+<div align="center">
+    <p style="padding: 10px; background-color: #333333; color: white; border: #111111 2px solid; font-size:22px; border-radius: 3px 4px">
+        The Academy - Final Year Project
+    </p>
+</div>
+<div align="center"><h4>• First person target shooting game</h4></div>
+<style>
+    .embed-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
 
-                .embed-container iframe,
-                .embed-container object, .embed-container embed {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                }
-        </style>
-        <div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
-    </div>
+        .embed-container iframe,
+        .embed-container object, .embed-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+</style>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
+</div>
+
+
 
     <fieldset>
         <legend>Comments</legend>
