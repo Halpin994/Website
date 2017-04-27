@@ -39,7 +39,7 @@
         <br />
         <div align="center"><h4>• Automatic Deployment System</h4></div>
         <p>
-            Having to manually deploy a website to a server each time a change is made is not efficient or necessary. I decided to automatically deploy the website because of this.
+            Having to manually deploy a website to a server each time a change is made is not efficient or necessary. Manual deployments are dangerous and prone to errors. Without automation, deployment is delayed because it takes time and is unreliable. More features and commits in a deployment means more potential issues. I decided to automatically deploy the website because of this.
         </p>
         <p><b>Github</b> - <a href="https://github.com/Halpin994/Website">Repo</a></p>
         <p>
@@ -93,28 +93,26 @@
             <br />
             Here I create a container builder.
         </p>
-        <fieldset>
-            var builder = new ContainerBuilder();
-        </fieldset>
+        <pre style="word-wrap:break-word">
+var builder = new ContainerBuilder();
+        </pre>
         <p>
             I then register the controllers and types like so. As you can see WebsiteSettings is registered as a ISettings type and created as an instance for use.
         </p>
-        <fieldset>
-            builder.RegisterControllers( typeof(MvcApplication).Assembly);
-            <br />
-            builder.RegisterType&lt;WebsiteSettings>().As&lt;ISettings>().SingleInstance();
-        </fieldset>
+        <pre style="word-wrap:break-word">
+builder.RegisterControllers( typeof(MvcApplication).Assembly);
+builder.RegisterType&lt;WebsiteSettings>().As&lt;ISettings>().SingleInstance();
+        </pre>
         <p>
             Finally I set the containers contents to the built instances of each type. The dependacny resolver is then set to Autofac.
         </p>
-        <fieldset>
-            var container = builder.Build();
-            <br />
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-        </fieldset>
+        <pre style="word-wrap:break-word">
+var container = builder.Build();
+DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        </pre>
         <p><b>Interfaces</b></p>
         <p>
-            Instead of using a class, I use interfaces for each object. This is because the interface can be used without knowing how it is being used. It can have multiple dependancies. As long as the dependancy satisfies the requirements of the interface, it can be used. This allows for easily adjustable code.
+            Instead of using a class, I use interfaces for each object. This is because the interface can be used without knowing how it works. It can have multiple dependancies. As long as the dependancy satisfies the requirements of the interface, it can be used. This allows for easily adjustable code. Passing interfaces with the bare minimum public properties and methods helps ensure we have properly encapsulated the interfaced class.
         </p>
         <p>
             Let's say our interface is the interface on a drinks machine which has no glass on it. As long as we know how to use the interface we can operate the drinks machine without knowing how it works. You put your money in, push a button to indicate which drink you want and the machine will give it to you. The dependancy of this interface is what determines how the machine works behind the interface. The operator of the interface does not know how it works behind the interface, it doesn't matter to the operator. This is what is called decoupling. The dependancy could just be a robot that counts your money, checks which button you pressed and grabs the drink you want then puts it in the tray. Maybe we don't like how that works and want to test a different method of getting the drinks. Let's say we have another location for the exotic drinks on the interface. Instead of changing how the dependancy works to get the drinks. We can just use another dependancy to tell the robot to get certain drinks from another location. It still doesn't matter to the operator of the interface how the drink is delivered to them, as long as they can use the interface, the machine will decide itself how to get the drink based on its dependancies.
@@ -130,8 +128,7 @@
         <p>
             Here is an example of my Settings interface.
         </p>
-        <fieldset>
-            <xmp>
+            <pre style="word-wrap:break-word">
 namespace MvcWebsite.Settings
 {
     public interface ISettings
@@ -141,13 +138,11 @@ namespace MvcWebsite.Settings
         string commentApiPath { get; }
     }
 }
-            </xmp>
-        </fieldset>
+            </pre>
         <p>
             As you can see the interface has nothing to do with how it gets these strings, this is determined by it's dependancy. The WebsiteSettings class.
         </p>
-        <fieldset>
-            <xmp>
+            <pre style="word-wrap:break-word">
 using System.Configuration;
                 
 namespace MvcWebsite.Settings
@@ -166,18 +161,17 @@ namespace MvcWebsite.Settings
         }
     }
 }
-            </xmp>
-        </fieldset>
+            </pre>
         <p>
             Here we can see how the website settings class gets the values of the strings from the webconfig file using their key identifier. These values are stored like so inside this file.
         </p>
-        <fieldset>
-            &lt;appsettings><br />
-            &lt;add key="LogPath" value="C:\logs\websitelogs.txt" /><br />
-            &lt;add key="HostUri" value="http://localhost:8888" /><br />
-            &lt;add key="commentApiPath" value="api/comments/" /><br />
-            &lt;/appsettings>
-        </fieldset>
+        <pre style="word-wrap:break-word">
+&lt;appsettings>
+&lt;add key="LogPath" value="C:\logs\websitelogs.txt" />
+&lt;add key="HostUri" value="http://localhost:8888" />
+&lt;add key="commentApiPath" value="api/comments/" />
+&lt;/appsettings>
+        </pre>
         <br />
         <div align="center"><h4>• Logger</h4></div>
         <p>
@@ -186,8 +180,7 @@ namespace MvcWebsite.Settings
         <p>
             Inside our ILogger dependancy we determine how the Log(string input) method works. I used a streamwriter which takes a parameter of the location of the log file. This is where I used the settings interface to get "settings.logPath". Now, "streamWriter.WriteLine(input);" can be used to log a line to the file inside the Log(string input) method. I had some difficulties getting the streamWriter to write on seperate lines each time but putting "streamWriter.Close();" inside the method seemed to fix that.
         </p>
-        <fieldset>
-        <xmp>
+        <pre style="word-wrap:break-word">
 using MvcWebsite.Settings;
 
 namespace MvcWebsite.Logger
@@ -210,26 +203,25 @@ namespace MvcWebsite.Logger
         }
     }
 }
-        </xmp>
-        </fieldset>
+        </pre>
         <p>
             The logger was then resgistered inside the startup class just like the settings was before.
         </p>
-        <fieldset>
-            builder.RegisterType&lt;TextLogger>().As&lt;ILogger>().SingleInstance();
-        </fieldset>
+        <pre style="word-wrap:break-word">
+builder.RegisterType&lt;TextLogger>().As&lt;ILogger>().SingleInstance();
+        </pre>
         <p>
             Now after getting the instance of the logger inside a controller we can use the following line of code to write text to the log file.
         </p>
-        <fieldset>
-            _logger.Log();
-        </fieldset>
+        <pre style="word-wrap:break-word">
+_logger.Log();
+        </pre>
         <p>
             I decided to log the time, page and IP address of each visit to my website using the following line of code in each page's controller (this specific one is for the Projects page)
         </p>
-        <fieldset>
-            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress)
-        </fieldset>
+        <pre style="word-wrap:break-word">
+_logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress)
+        </pre>
         <p>
             At this time of writing, there are currently over 2000 logs of page visits to my website. Most of them by me but a lot of the visits were by friends and family also.
         </p>
@@ -242,8 +234,7 @@ namespace MvcWebsite.Logger
         <p>
             The comment model is just a definition of what a comment should consist of. As you can see in this code snippet, the comment model consists of an integer Id and strings for user name, the webpage it was submitted to and the comment itself. It also contains a constructor which takes a value of type string and sets the webpage value to whatever is passed. When the create comment view is rendered on each page, it is passed the name of the webpage it is on. Then when a comment is created it's webpage is automatically set by the constructor.
         </p>
-        <fieldset>
-        <xmp>
+        <pre style="word-wrap:break-word">
 public class CommentModel
 {
     public int Id { get; set; }
@@ -258,14 +249,12 @@ public class CommentModel
         this.Webpage = webpage;
     }
 }
-        </xmp>
-        </fieldset>
+        </pre>
         <p><b>Message Broker Service</b> <a href='http://www.conorhalpin.com:8080/job/MessageBroker/'><img src='http://www.conorhalpin.com:8080/job/MessageBroker/badge/icon'></a></p>
         <p>
             The message broker service consists of a webserver class shown below. This is used to stop and start the service. To get this working I had to get the NuGet package Microsoft.Owin.SelfHost. The port the service is run on will be used later in the MessageBrokerApi class in the website project to allow communication between the website and the service.
         </p>
-        <fieldset>
-            <xmp>
+            <pre style="word-wrap:break-word">
 using Microsoft.Owin.Hosting;
 
 public class Webserver
@@ -281,8 +270,7 @@ public class Webserver
         _webApp.Dispose();
     }
 }
-            </xmp>
-        </fieldset>
+            </pre>
         <p>
             It also consists of a comment model the same as in the website but without the constructor, a comment controller which works with the comment controller and message broker api inside the webiste and finally the startup and program classes. The startup class is used to setup the default routing configuration.
         </p>
@@ -302,8 +290,7 @@ public class Webserver
         <p>
             The second job doesn't build the project, so it's workspace only contains two VBScripts which I use to manage the bin folder in the first jobs workspace. The first script is a zip script so I can zip up the bin folder.
         </p>
-        <fieldset>
-            <xmp>
+            <pre style="word-wrap:break-word">
 'Get command-line arguments.
 Set objArgs = WScript.Arguments
 InputFolder = objArgs(0)
@@ -322,29 +309,27 @@ objShell.NameSpace(ZipFile).CopyHere(source)
 
 'Required!
 wScript.Sleep 2000
-            </xmp>
-        </fieldset>
+            </pre>
         <p>
             The first build step of my deployment job is now
-            <fieldset>
-                CScript zip.vbs "C:\Program Files (x86)\Jenkins\workspace\MessageBroker\MessageBroker\bin" "C:\BrokerStorage\MessageBroker.zip"
-            </fieldset>
+            <pre style="word-wrap:break-word">
+CScript zip.vbs "C:\Program Files (x86)\Jenkins\workspace\MessageBroker\MessageBroker\bin" "C:\BrokerStorage\MessageBroker.zip"
+            </pre>
             We can see in the script above we get the folder we want zipped and where we want to zip it to through two arguments. These two arguments are specified here and the script uses these to do what we want.
         </p>
         <p>
             The next step is to stop the currently installed service to prepare it for uninstallation.
-            <fieldset>
-                "C:\BrokerRun\bin\Debug\MessageBroker.exe" stop
-            </fieldset>
+            <pre style="word-wrap:break-word">
+"C:\BrokerRun\bin\Debug\MessageBroker.exe" stop
+            </pre>
             I then uninstall the service using
-            <fieldset>
-                "C:\BrokerRun\bin\Debug\MessageBroker.exe" uninstall
-            </fieldset>
+            <pre style="word-wrap:break-word">
+"C:\BrokerRun\bin\Debug\MessageBroker.exe" uninstall
+            </pre>
         </p>
         <p>
             Now I can begin installing the newly built service. For this I need to use a new script to unzip the bin file inside the brokerstorage folder. This is the script that is used to unzip the file.
-            <fieldset>
-                <xmp>
+        <pre style="word-wrap:break-word">
 'Get command-line arguments.
 Set objArgs = WScript.Arguments
 ZipFile = objArgs(0)
@@ -361,20 +346,19 @@ objShell.NameSpace(destFolder).copyHere FilesInZip, 16
 Set fso = Nothing
 Set objShell = Nothing
 Set FilesInZip = Nothing
-                </xmp>
-            </fieldset>
+            </pre>
             The next build step is to use this script to unzip the zip file to a new location.
-            <fieldset>
-                CScript unzip.vbs "C:\BrokerStorage\MessageBroker.zip" "C:\BrokerRun"
-            </fieldset>
+            <pre style="word-wrap:break-word">
+CScript unzip.vbs "C:\BrokerStorage\MessageBroker.zip" "C:\BrokerRun"
+            </pre>
            The last two steps are used to safely install the service
-            <fieldset>
-                C:\BrokerRun\bin\Debug\MessageBroker.exe" install
-            </fieldset>
+            <pre style="word-wrap:break-word">
+C:\BrokerRun\bin\Debug\MessageBroker.exe" install
+            </pre>
             and start it
-            <fieldset>
-                "C:\BrokerRun\bin\Debug\MessageBroker.exe" start
-            </fieldset>
+            <pre style="word-wrap:break-word">
+"C:\BrokerRun\bin\Debug\MessageBroker.exe" start
+            </pre>
             That's it. Now my message broker will be automatically deployed as a service, server side, each time a change is made to its github repo.
         </p>
         <p><b>Message Broker Api</b></p>
@@ -386,26 +370,25 @@ Set FilesInZip = Nothing
         <p><b>Comment List View</b></p>
         <p>
             Inside each pages controller we get the comments for that page and return them to the view to be displayed. This expample is specific to the projects page.
-            <fieldset>
-                var pageComments = _messageBroker.GetPageComments("Projects");
-                return View(pageComments);
-            </fieldset>
+            <pre style="word-wrap:break-word">
+var pageComments = _messageBroker.GetPageComments("Projects");
+return View(pageComments);
+            </pre>
             This is what the actual view for the CommentList looks like. As you can see all it does is lists out each comments Username and Comment. It doesn't need to sort which comments it needs as they have already been sorted in the message broker.
-            <fieldset>
-                &#x40;model IEnumerable&lt;MvcWebsite.Models.CommentModel><br />
-                <br />
-                &#x40;foreach (var item in Model)<br />
-                {<br />
-                        &lt;fieldset><br />
-                        &lt;b>&#x40;item.UserName:&lt;/b><br />
-                        &lt;br />&#x40;item.Comment<br />
-                        &lt;/fieldset><br />
-                }
-            </fieldset>
+            <pre style="word-wrap:break-word">
+&#x40;model IEnumerable&lt;MvcWebsite.Models.CommentModel>
+
+&#x40;foreach (var item in Model)
+{
+    &lt;fieldset>
+    &lt;b>&#x40;item.UserName:&lt;/b>&#x40;item.Comment
+    &lt;/fieldset>
+}
+            </pre>
             Finally, inside the project view we use the following line of code to render the comment list view inside the projects page.
-            <fieldset>
-                &#x40;{Html.RenderPartial("~/Views/Comment/CommentList.cshtml");}
-            </fieldset>
+            <pre style="word-wrap:break-word">
+&#x40;{Html.RenderPartial("~/Views/Comment/CommentList.cshtml");}
+            </pre>
         </p>
         <br />
         <div align="center">
