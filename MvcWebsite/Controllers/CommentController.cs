@@ -28,7 +28,7 @@ namespace MvcWebsite.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateComment(CommentModel commentToCreate)
         {
-            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}, UserNameSubmitted={3}, CommentSubmitted={4}.", DateTime.Now, "Create Comment", Request.UserHostAddress,commentToCreate.UserName.ToString(), commentToCreate.Comment.ToString()));
+            //_logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}, UserNameSubmitted={3}, CommentSubmitted={4}.", DateTime.Now, "Create Comment", Request.UserHostAddress,commentToCreate.UserName.ToString(), commentToCreate.Comment.ToString()));
             _messageBroker.AddComment(commentToCreate);
 
             switch(commentToCreate.Webpage)
