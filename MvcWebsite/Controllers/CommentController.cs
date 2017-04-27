@@ -20,6 +20,11 @@ namespace MvcWebsite.Controllers
             _messageBroker = messageBroker;
         }
 
+        public ActionResult CreateComment()
+        {
+            return View();
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateComment(CommentModel commentToCreate)
         {
