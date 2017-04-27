@@ -259,7 +259,7 @@ public class Webserver
     private IDisposable _webApp;
     public void Start()
     {
-        _webApp = WebApp.Start<startup>("http://localhost:8888");
+        _webApp = WebApp.Start&lt;Startup>("http://localhost:8888");
     }
     public void Stop()
     {
