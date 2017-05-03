@@ -181,8 +181,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HttpClientFactory\HttpClientFactory_.cs" />
-    <Compile Include="HttpClientFactory\IHttpClientFactory_.cs" />
+    <Compile Include="HttpClientFactory\HttpClientSimpleFactory.cs" />
+    <Compile Include="HttpClientFactory\IHttpClientSimpleFactory.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\TextLogger.cs" />
     <Compile Include="MessageBroker\IMessageBrokerApi.cs" />
