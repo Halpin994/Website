@@ -20,7 +20,7 @@ namespace MvcWebsite.HttpClientFactory
         public HttpClient CreateClient()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentApiPath);
+            client.BaseAddress = new Uri(new Uri(settings.messageBrokerUri), settings.commentApiPath);
             return client;
         }
     }
