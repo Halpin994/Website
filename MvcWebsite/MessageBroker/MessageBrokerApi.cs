@@ -14,11 +14,13 @@ namespace MvcWebsite.MessageBroker
 {
     public class MessageBrokerApi : IMessageBrokerApi
     {
-        private IHttpClientFactory_ httpClient;
+        private IHttpClientFactory_ _httpClient;
+        private ILogger _logger;
 
-        public MessageBrokerApi(ILogger logger, IHttpClientFactory_ httpClientFactory)
+        public MessageBrokerApi(ILogger logger, IHttpClientFactory_ httpClient)
         {
-            httpClient = httpClientFactory;
+            _httpClient = httpClient;
+            _logger = logger;
         }
  
         public IEnumerable<CommentModel> GetPageComments(string pageFilter)
@@ -32,15 +34,16 @@ namespace MvcWebsite.MessageBroker
             try
             {
                 HttpResponseMessage response;
-                using (var client = httpClient.CreateClient())
+                using (var client = _httpClient.CreateClient())
                 {
                     response = client.GetAsync(client.BaseAddress).Result;
                 }
                 result = response.Content.ReadAsAsync<IEnumerable<CommentModel>>().Result;
             }
-            catch(Exception e)
+            catch(Exception _exception)
             {
                 //Log exception
+                _logger.LogException(String.Format("Time={0}, Exception={1}.", DateTime.Now, _exception));
             }
             return result;
         }
@@ -49,7 +52,7 @@ namespace MvcWebsite.MessageBroker
         public CommentModel GetComment(int id)
         {
             HttpResponseMessage response;
-            using (var client = httpClient.CreateClient())
+            using (var client = _httpClient.CreateClient())
             {
                 response = client.GetAsync(
                     new Uri(client.BaseAddress, id.ToString())).Result;
@@ -62,7 +65,7 @@ namespace MvcWebsite.MessageBroker
         public System.Net.HttpStatusCode AddComment(CommentModel comment)
         {
             HttpResponseMessage response;
-            using (var client = httpClient.CreateClient())
+            using (var client = _httpClient.CreateClient())
             {
                 response = client.PostAsJsonAsync(client.BaseAddress, comment).Result;
             }
@@ -73,7 +76,7 @@ namespace MvcWebsite.MessageBroker
         public System.Net.HttpStatusCode UpdateComment(CommentModel comment)
         {
             HttpResponseMessage response;
-            using (var client = httpClient.CreateClient())
+            using (var client = _httpClient.CreateClient())
             {
                 response = client.PutAsJsonAsync(client.BaseAddress, comment).Result;
             }
@@ -84,7 +87,7 @@ namespace MvcWebsite.MessageBroker
         public System.Net.HttpStatusCode DeleteComment(int id)
         {
             HttpResponseMessage response;
-            using (var client = httpClient.CreateClient())
+            using (var client = _httpClient.CreateClient())
             {
                 response = client.DeleteAsync(
                     new Uri(client.BaseAddress, id.ToString())).Result;

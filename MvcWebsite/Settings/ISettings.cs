@@ -8,7 +8,9 @@ namespace MvcWebsite.Settings
 {
     public interface ISettings
     {
-        string logPath { get;}
+        string pageVisitLogPath { get;}
+        string exceptionLogPath { get; }
+        string commentLogPath { get; }
         string hostUri { get;}
         string commentApiPath { get; }
     }

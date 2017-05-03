@@ -22,7 +22,7 @@ namespace MvcWebsite.Controllers
         public ActionResult Projects()
         {
             var pageComments = _messageBroker.GetPageComments("Projects");
-            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress));
+            _logger.LogPageVisit(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Projects", Request.UserHostAddress));
             return View(pageComments);
         }
     }

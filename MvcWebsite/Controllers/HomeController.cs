@@ -24,7 +24,7 @@ namespace MvcWebsite.Controllers
         public ActionResult Index()
         {
             var pageComments = _messageBroker.GetPageComments("Index");
-            _logger.Log(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Index", Request.UserHostAddress));
+            _logger.LogPageVisit(String.Format("Time={0}, PageRequested={1}, RemoteIP={2}.", DateTime.Now, "Index", Request.UserHostAddress));
             return View(pageComments);
         }
     }
