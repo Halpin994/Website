@@ -18,18 +18,18 @@ namespace MvcWebsite.Logger
         }
         public void LogPageVisit(string input)
         {
-            writeLog(input, settings.pageVisitLogPath);
+            WriteLog(input, settings.pageVisitLogPath);
         }
         public void LogException(string input)
         {
-            writeLog(input, settings.exceptionLogPath);
+            WriteLog(input, settings.exceptionLogPath);
         }
         public void LogComment(string input)
         {
-            writeLog(input, settings.commentLogPath);
+            WriteLog(input, settings.commentLogPath);
         }
 
-        private void writeLog(string input, string path)
+        private void WriteLog(string input, string path)
         {
             using (var streamWriter = new StreamWriter(path, true))
             {

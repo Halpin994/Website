@@ -11,7 +11,7 @@ namespace MvcWebsite.Settings
         string pageVisitLogPath { get;}
         string exceptionLogPath { get; }
         string commentLogPath { get; }
-        string hostUri { get;}
+        string messageBrokerUri { get;}
         string commentApiPath { get; }
     }
 }
