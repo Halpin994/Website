@@ -13,19 +13,9 @@ namespace MvcWebsite.MessageBroker
     //Comment Client class
     public class MessageBrokerApi : IMessageBrokerApi
     {
-        private ISettings settings;
+        public MessageBrokerApi(IHttpClientFactory httpClientFactory, ILogger logger) //aka CommentClient()
+        {
 
-        public MessageBrokerApi(ISettings webSiteSettings) //aka CommentClient()
-        {
-            settings = webSiteSettings;
-        }
- 
- 
-        public HttpClient CreateClient()
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(new Uri(settings.hostUri), settings.commentApiPath);
-            return client;
         }
 
         public IEnumerable<CommentModel> GetPageComments(string pageFilter)
@@ -39,7 +29,7 @@ namespace MvcWebsite.MessageBroker
             try
             {
                 HttpResponseMessage response;
-                using (var client = CreateClient())
+                using (var client = /* Call your httpClientFactory here */)
                 {
                     response = client.GetAsync(client.BaseAddress).Result;
                 }
