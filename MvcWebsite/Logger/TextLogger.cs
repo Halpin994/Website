@@ -18,23 +18,20 @@ namespace MvcWebsite.Logger
         }
         public void LogPageVisit(string input)
         {
-            using (var streamWriter = new StreamWriter(settings.pageVisitLogPath, true))
-            {
-                streamWriter.WriteLine(input);
-                streamWriter.Close();
-            }
+            writeLog(input, settings.pageVisitLogPath);
         }
         public void LogException(string input)
         {
-            using (var streamWriter = new StreamWriter(settings.exceptionLogPath, true))
-            {
-                streamWriter.WriteLine(input);
-                streamWriter.Close();
-            }
+            writeLog(input, settings.exceptionLogPath);
         }
         public void LogComment(string input)
         {
-            using (var streamWriter = new StreamWriter(settings.commentLogPath, true))
+            writeLog(input, settings.commentLogPath);
+        }
+
+        private void writeLog(string input, string path)
+        {
+            using (var streamWriter = new StreamWriter(path, true))
             {
                 streamWriter.WriteLine(input);
                 streamWriter.Close();

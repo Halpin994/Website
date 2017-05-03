@@ -14,10 +14,10 @@ namespace MvcWebsite.MessageBroker
 {
     public class MessageBrokerApi : IMessageBrokerApi
     {
-        private IHttpClientFactory_ _httpClient;
+        private IHttpClientSimpleFactory _httpClient;
         private ILogger _logger;
 
-        public MessageBrokerApi(ILogger logger, IHttpClientFactory_ httpClient)
+        public MessageBrokerApi(ILogger logger, IHttpClientSimpleFactory httpClient)
         {
             _httpClient = httpClient;
             _logger = logger;

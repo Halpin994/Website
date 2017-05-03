@@ -8,11 +8,11 @@ using MvcWebsite.Settings;
 
 namespace MvcWebsite.HttpClientFactory
 {
-    public class HttpClientFactory_ : IHttpClientFactory_
+    public class HttpClientSimpleFactory : IHttpClientSimpleFactory
     {
         private ISettings settings;
 
-        public HttpClientFactory_(ISettings webSiteSettings)
+        public HttpClientSimpleFactory(ISettings webSiteSettings)
         {
             settings = webSiteSettings;
         }

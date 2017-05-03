@@ -8,7 +8,7 @@ using System.Net.Http;
 
 namespace MvcWebsite.HttpClientFactory
 {
-    public interface IHttpClientFactory_
+    public interface IHttpClientSimpleFactory
     {
         HttpClient CreateClient();
     }
