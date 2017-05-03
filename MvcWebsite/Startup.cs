@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using MvcWebsite.Logger;
 using MvcWebsite.Settings;
 using MvcWebsite.MessageBroker;
+using MvcWebsite.HttpClientFactory;
 
 [assembly: OwinStartupAttribute(typeof(MvcWebsite.Startup))]
 namespace MvcWebsite
@@ -27,6 +28,7 @@ namespace MvcWebsite
             builder.RegisterType<TextLogger>().As<ILogger>().SingleInstance();
             builder.RegisterType<WebsiteSettings>().As<ISettings>().SingleInstance();
             builder.RegisterType<MessageBrokerApi>().As<IMessageBrokerApi>().SingleInstance();
+            builder.RegisterType<HttpClientSimpleFactory>().As<IHttpClientSimpleFactory>().SingleInstance();
 
             // Run other optional steps, like registering model binders,
             // web abstractions, etc., then set the dependency resolver
