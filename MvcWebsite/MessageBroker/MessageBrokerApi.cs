@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
 using System.Net.Http;
-
 using MvcWebsite.Models;
 using MvcWebsite.Logger;
 using MvcWebsite.HttpClientFactory;
@@ -14,8 +12,8 @@ namespace MvcWebsite.MessageBroker
 {
     public class MessageBrokerApi : IMessageBrokerApi
     {
-        private IHttpClientSimpleFactory _httpClientFactory;
-        private ILogger _logger;
+        private readonly IHttpClientSimpleFactory _httpClientFactory;
+        private readonly ILogger _logger;
 
         public MessageBrokerApi(ILogger logger, IHttpClientSimpleFactory httpClient)
         {
@@ -40,9 +38,9 @@ namespace MvcWebsite.MessageBroker
                 }
                 result = response.Content.ReadAsAsync<IEnumerable<CommentModel>>().Result;
             }
-            catch(Exception _exception)
+            catch(Exception exception)
             {
-                _logger.LogException(String.Format("Time={0}, Exception={1}.", DateTime.Now, _exception));
+                _logger.LogException(String.Format("Time={0}, Exception={1}.", DateTime.Now, exception));
             }
             return result;
         }
@@ -66,7 +64,7 @@ namespace MvcWebsite.MessageBroker
             HttpResponseMessage response;
             using (var client = _httpClientFactory.CreateClient())
             {
-                response = client.PostAsJsonAsync(client.BaseAddress, comment).Result;
+                response = client.PostAsJsonAsync(client.BaseAddress.ToString(), comment).Result;
             }
             return response.StatusCode;
         }
@@ -77,7 +75,7 @@ namespace MvcWebsite.MessageBroker
             HttpResponseMessage response;
             using (var client = _httpClientFactory.CreateClient())
             {
-                response = client.PutAsJsonAsync(client.BaseAddress, comment).Result;
+                response = client.PutAsJsonAsync(client.BaseAddress.ToString(), comment).Result;
             }
             return response.StatusCode;
         }
@@ -89,7 +87,7 @@ namespace MvcWebsite.MessageBroker
             using (var client = _httpClientFactory.CreateClient())
             {
                 response = client.DeleteAsync(
-                    new Uri(client.BaseAddress, id.ToString())).Result;
+                    new Uri(client.BaseAddress, id.ToString(CultureInfo.InvariantCulture))).Result;
             }
             return response.StatusCode;
         }
