@@ -16,11 +16,11 @@ namespace MvcWebsite.Settings
 
         public WebsiteSettings()
         {
-            pageVisitLogPath = ConfigurationManager.AppSettings["PageVisitLogPath"].ToString();
-            exceptionLogPath = ConfigurationManager.AppSettings["ExceptionLogPath"].ToString();
-            commentLogPath = ConfigurationManager.AppSettings["CommentLogPath"].ToString();
-            messageBrokerUri = ConfigurationManager.AppSettings["MessageBrokerUri"].ToString();
-            commentApiPath = ConfigurationManager.AppSettings["CommentApiPath"].ToString();
+            pageVisitLogPath = ConfigurationManager.AppSettings["PageVisitLogPath"];
+            exceptionLogPath = ConfigurationManager.AppSettings["ExceptionLogPath"];
+            commentLogPath = ConfigurationManager.AppSettings["CommentLogPath"];
+            messageBrokerUri = ConfigurationManager.AppSettings["MessageBrokerUri"];
+            commentApiPath = ConfigurationManager.AppSettings["CommentApiPath"];
         }
     }
 }

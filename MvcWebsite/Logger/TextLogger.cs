@@ -10,23 +10,23 @@ namespace MvcWebsite.Logger
 {
     public class TextLogger : ILogger
     {
-        private ISettings settings;
+        private readonly ISettings _settings;
 
         public TextLogger(ISettings webSiteSettings)
         {
-            settings = webSiteSettings;
+            _settings = webSiteSettings;
         }
         public void LogPageVisit(string input)
         {
-            WriteLog(input, settings.pageVisitLogPath);
+            WriteLog(input, _settings.pageVisitLogPath);
         }
         public void LogException(string input)
         {
-            WriteLog(input, settings.exceptionLogPath);
+            WriteLog(input, _settings.exceptionLogPath);
         }
         public void LogComment(string input)
         {
-            WriteLog(input, settings.commentLogPath);
+            WriteLog(input, _settings.commentLogPath);
         }
 
         private void WriteLog(string input, string path)

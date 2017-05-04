@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using Autofac.Integration;
-using Autofac.Builder;
 using Microsoft.Owin;
 using Owin;
 using System.Web.Mvc;
@@ -13,7 +11,7 @@ using MvcWebsite.HttpClientFactory;
 [assembly: OwinStartupAttribute(typeof(MvcWebsite.Startup))]
 namespace MvcWebsite
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
@@ -40,7 +38,6 @@ namespace MvcWebsite
 
             // Register the Autofac middleware FIRST, then the Autofac MVC middleware.
             app.UseAutofacMiddleware(container);
-            //app.UseAutofacMvc();
         }
     }
 }

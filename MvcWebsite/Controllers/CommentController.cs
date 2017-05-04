@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MvcWebsite.Settings;
+
 using MvcWebsite.Logger;
 using MvcWebsite.MessageBroker;
 using MvcWebsite.Models;
@@ -12,8 +9,8 @@ namespace MvcWebsite.Controllers
 {
     public class CommentController : Controller
     {
-        ILogger _logger;
-        IMessageBrokerApi _messageBroker;
+        readonly ILogger _logger;
+        readonly IMessageBrokerApi _messageBroker;
         public CommentController(ILogger textLogger, IMessageBrokerApi messageBroker)
         {
             _logger = textLogger;

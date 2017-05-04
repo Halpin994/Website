@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MvcWebsite.Models
 {
@@ -17,7 +13,7 @@ namespace MvcWebsite.Models
 
         public CommentModel(String webpage)
         {
-            this.Webpage = webpage;
+            Webpage = webpage;
         }
     }
 }
