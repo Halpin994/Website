@@ -1,6 +1,6 @@
 ﻿using MvcWebsite.Logger;
 
-namespace Tests.Unit.MockedComponents
+namespace MvcWebsite.Tests.Unit.MockedComponents
 {
     public class MockLogger : ILogger
     {

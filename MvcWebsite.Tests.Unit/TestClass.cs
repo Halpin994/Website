@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using MvcWebsite.MessageBroker;
 using MvcWebsite.Models;
-using Tests.Unit.MockedComponents;
+using MvcWebsite.Tests.Unit.MockedComponents;
 
-namespace Tests.Unit
+namespace MvcWebsite.Tests.Unit
 {
     [TestFixture]
     public class TestClass

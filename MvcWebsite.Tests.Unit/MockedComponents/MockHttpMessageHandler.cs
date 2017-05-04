@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Tests.Unit.MockedComponents
+namespace MvcWebsite.Tests.Unit.MockedComponents
 {
     public class MockHttpMessageHandler : HttpMessageHandler
     {

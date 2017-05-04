@@ -3,7 +3,7 @@ using System.Net.Http;
 using MvcWebsite.HttpClientFactory;
 
 
-namespace Tests.Unit.MockedComponents
+namespace MvcWebsite.Tests.Unit.MockedComponents
 {
     class MockHttpClientSimpleFactory : IHttpClientSimpleFactory
     {
