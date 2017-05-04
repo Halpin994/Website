@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace MvcWebsite.Settings
 {
     public class WebsiteSettings : ISettings
     {
-        public string pageVisitLogPath { get; private set; }
-        public string exceptionLogPath { get; private set; }
-        public string commentLogPath { get; private set; }
-        public string messageBrokerUri { get; private set; }
-        public string commentApiPath { get; private set; }
+        public string PageVisitLogPath { get; private set; }
+        public string ExceptionLogPath { get; private set; }
+        public string CommentLogPath { get; private set; }
+        public string MessageBrokerUri { get; private set; }
+        public string CommentApiPath { get; private set; }
 
         public WebsiteSettings()
         {
-            pageVisitLogPath = ConfigurationManager.AppSettings["PageVisitLogPath"].ToString();
-            exceptionLogPath = ConfigurationManager.AppSettings["ExceptionLogPath"].ToString();
-            commentLogPath = ConfigurationManager.AppSettings["CommentLogPath"].ToString();
-            messageBrokerUri = ConfigurationManager.AppSettings["MessageBrokerUri"].ToString();
-            commentApiPath = ConfigurationManager.AppSettings["CommentApiPath"].ToString();
+            PageVisitLogPath = ConfigurationManager.AppSettings["PageVisitLogPath"];
+            ExceptionLogPath = ConfigurationManager.AppSettings["ExceptionLogPath"];
+            CommentLogPath = ConfigurationManager.AppSettings["CommentLogPath"];
+            MessageBrokerUri = ConfigurationManager.AppSettings["MessageBrokerUri"];
+            CommentApiPath = ConfigurationManager.AppSettings["CommentApiPath"];
         }
     }
 }
