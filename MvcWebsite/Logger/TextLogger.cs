@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using MvcWebsite.Settings;
 
 namespace MvcWebsite.Logger
@@ -18,15 +13,15 @@ namespace MvcWebsite.Logger
         }
         public void LogPageVisit(string input)
         {
-            WriteLog(input, _settings.pageVisitLogPath);
+            WriteLog(input, _settings.PageVisitLogPath);
         }
         public void LogException(string input)
         {
-            WriteLog(input, _settings.exceptionLogPath);
+            WriteLog(input, _settings.ExceptionLogPath);
         }
         public void LogComment(string input)
         {
-            WriteLog(input, _settings.commentLogPath);
+            WriteLog(input, _settings.CommentLogPath);
         }
 
         private void WriteLog(string input, string path)

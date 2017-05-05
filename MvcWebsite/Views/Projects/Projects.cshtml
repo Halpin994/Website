@@ -444,7 +444,7 @@ public System.Net.HttpStatusCode AddComment(CommentModel comment)
 }
 </pre>
         This communicates with the following Post method inside the Message Broker service.
-        <pre class="word-wrap:break-word">
+        <pre style="word-wrap:break-word">
 public IHttpActionResult Post(CommentModel comment)
         {
             if(comment == null)
@@ -469,7 +469,7 @@ public IHttpActionResult Post(CommentModel comment)
         </p>
         <p><b>Comment Controller</b></p>
         Besides the constructor getting the instances of the Logger and message broker api. All the comment controller contains for now is a CreateComment() method which looks like this.
-            <pre class="word-wrap:break-word">
+            <pre style="word-wrap:break-word">
 [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateComment(CommentModel commentToCreate)
         {
@@ -491,7 +491,6 @@ public IHttpActionResult Post(CommentModel comment)
         }
 </pre>
             This uses the AddComment() method in the api to post the comment to the service. Then I have a switch case set up so when a comment is posted it will check the webpage value of the comment that was just submitted and then redirect the user to the page they are on. So it basically just refreshes the page so the user can see their newly submitted comment.
-        </p>
         <p><b>Create Comment View</b></p>
             The create comment view is a html form with two text boxes for Username and Comment. I have set character limits on both.
             <pre style="word-wrap:break-word">
@@ -567,7 +566,7 @@ return View(pageComments);
                     height: 100%;
                 }
         </style>
-        <div class='embed-container'><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' frameborder='0' allowfullscreen></iframe></div>
+        <div class="embed-container"><iframe src='https://www.youtube.com/embed/sf2liWaX2Rw' allowfullscreen></iframe></div>
     </div>
 
     <fieldset>

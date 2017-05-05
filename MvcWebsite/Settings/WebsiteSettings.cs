@@ -8,19 +8,19 @@ namespace MvcWebsite.Settings
 {
     public class WebsiteSettings : ISettings
     {
-        public string pageVisitLogPath { get; private set; }
-        public string exceptionLogPath { get; private set; }
-        public string commentLogPath { get; private set; }
-        public string messageBrokerUri { get; private set; }
-        public string commentApiPath { get; private set; }
+        public string PageVisitLogPath { get; private set; }
+        public string ExceptionLogPath { get; private set; }
+        public string CommentLogPath { get; private set; }
+        public string MessageBrokerUri { get; private set; }
+        public string CommentApiPath { get; private set; }
 
         public WebsiteSettings()
         {
-            pageVisitLogPath = ConfigurationManager.AppSettings["PageVisitLogPath"];
-            exceptionLogPath = ConfigurationManager.AppSettings["ExceptionLogPath"];
-            commentLogPath = ConfigurationManager.AppSettings["CommentLogPath"];
-            messageBrokerUri = ConfigurationManager.AppSettings["MessageBrokerUri"];
-            commentApiPath = ConfigurationManager.AppSettings["CommentApiPath"];
+            PageVisitLogPath = ConfigurationManager.AppSettings["PageVisitLogPath"];
+            ExceptionLogPath = ConfigurationManager.AppSettings["ExceptionLogPath"];
+            CommentLogPath = ConfigurationManager.AppSettings["CommentLogPath"];
+            MessageBrokerUri = ConfigurationManager.AppSettings["MessageBrokerUri"];
+            CommentApiPath = ConfigurationManager.AppSettings["CommentApiPath"];
         }
     }
 }

@@ -11,8 +11,7 @@ namespace MvcWebsite.Tests.Unit
         [Test]
         public void TestMethod()
         {
-            int result;
-            result = 2 + 2;
+            const int result = 2 + 2;
             Assert.AreEqual(result, 4);
         }
     }
