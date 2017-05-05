@@ -41,14 +41,11 @@
     <Compile Include="MockedComponents\MockHttpClientSimpleFactory.cs" />
     <Compile Include="MockedComponents\MockHttpMessageHandler.cs" />
     <Compile Include="MockedComponents\MockLogger.cs" />
-    <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcWebsite\MvcWebsite.csproj">
