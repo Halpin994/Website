@@ -21,7 +21,7 @@ namespace MvcWebsite.HttpClientFactory
         {
             var client = new HttpClient
             {
-                BaseAddress = new Uri(new Uri(_settings.messageBrokerUri), _settings.commentApiPath)
+                BaseAddress = new Uri(new Uri(_settings.MessageBrokerUri), _settings.CommentApiPath)
             };
             return client;
         }
