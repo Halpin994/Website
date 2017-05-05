@@ -1,7 +1,8 @@
-﻿
+﻿using MvcWebsite.Logger;
+
 namespace MvcWebsite.Tests.Unit.MockedComponents
 {
-    public class MockLogger
+    public class MockLogger: ILogger
     {
         public void LogPageVisit(string input)
         {

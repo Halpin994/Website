@@ -32,8 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MvcWebsite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MvcWebsite\bin\MvcWebsite.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
@@ -43,6 +47,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockedComponents\MockHttpClientSimpleFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MockedComponents\MockHttpMessageHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MockedComponents\MockLogger.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,12 +61,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcWebsite\MvcWebsite.csproj">
-      <Project>{33232b88-7faa-4966-bec1-c832bfe39564}</Project>
-      <Name>MvcWebsite</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
