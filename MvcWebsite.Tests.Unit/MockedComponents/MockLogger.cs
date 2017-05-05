@@ -2,7 +2,7 @@
 
 namespace MvcWebsite.Tests.Unit.MockedComponents
 {
-    public class MockLogger : ILogger
+    internal class MockLogger : ILogger
     {
         public void LogPageVisit(string input)
         {

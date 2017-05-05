@@ -5,7 +5,7 @@ using MvcWebsite.HttpClientFactory;
 
 namespace MvcWebsite.Tests.Unit.MockedComponents
 {
-    class MockHttpClientSimpleFactory : IHttpClientSimpleFactory
+    internal class MockHttpClientSimpleFactory : IHttpClientSimpleFactory
     {
         public HttpClient CreateClient()
         {

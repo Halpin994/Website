@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MvcWebsite.Tests.Unit.MockedComponents
 {
-    public class MockHttpMessageHandler : HttpMessageHandler
+    internal class MockHttpMessageHandler : HttpMessageHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
