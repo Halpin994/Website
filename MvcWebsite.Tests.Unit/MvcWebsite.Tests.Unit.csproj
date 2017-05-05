@@ -38,6 +38,9 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockedComponents\MockHttpClientSimpleFactory.cs" />
+    <Compile Include="MockedComponents\MockHttpMessageHandler.cs" />
+    <Compile Include="MockedComponents\MockLogger.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
