@@ -134,6 +134,22 @@ namespace MvcWebsite.Tests.Unit
 
         }
 
+        [Test]
+        [TestCase("EmptyResponse")]
+        public void TestEmptyResponseComments(String input)
+        {
+            String mockedResponse =
+                "[" +
+                "]";
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var actualComments = messageBrokerApi.GetPageComments("ContactMe").ToList();
+
+            var expectedComments = new List<CommentModel>();
+
+            AssertCommentsGot(actualComments, expectedComments);
+
+        }
+
         private void AssertCommentsGot(List<CommentModel> actualList, List<CommentModel> expectedList)
         {
             Assert.AreEqual(actualList.Count, expectedList.Count);
