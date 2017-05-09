@@ -6,14 +6,31 @@ using MvcWebsite.MessageBroker;
 using MvcWebsite.Models;
 using MvcWebsite.Tests.Unit.MockedComponents;
 
-namespace MvcWebsite.Tests.Unit
+namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
 {
     [TestFixture]
-    public class TestClass
+    public class GetCommentsUnitTests
     {
+        private void AssertCommentCollectionsEqual(List<CommentModel> expectedList, List<CommentModel> actualList)
+        {
+            Assert.AreEqual(actualList.Count, expectedList.Count);
+
+            foreach (var expected in expectedList)
+            {
+                if (actualList.Any(comment => comment.Id.Equals(expected.Id)))
+                {
+                    var actualComment = actualList.First(comment => comment.Id.Equals(expected.Id));
+                    Assert.AreEqual(expected.Id, actualComment.Id);
+                    Assert.AreEqual(expected.Comment, actualComment.Comment);
+                    Assert.AreEqual(expected.UserName, actualComment.UserName);
+                    Assert.AreEqual(expected.Webpage, actualComment.Webpage);
+                }
+            }
+        }
+
         [Test]
         [TestCase("Index")]
-        public void TestIndexGetComments(String input)
+        public void TestGetCommentsIndex(String input)
         {
             String mockedResponse =
                 "[" +
@@ -32,7 +49,7 @@ namespace MvcWebsite.Tests.Unit
                 "]";
             var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
             var actualComments = messageBrokerApi.GetPageComments("Index").ToList();
- 
+
             var expectedComments = new List<CommentModel>()
             {
                 new CommentModel()
@@ -43,14 +60,13 @@ namespace MvcWebsite.Tests.Unit
                     Webpage = "Index"
                 }
             };
- 
-            AssertCommentsGot(actualComments, expectedComments);
 
+            AssertCommentCollectionsEqual(expectedComments, actualComments);
         }
 
         [Test]
         [TestCase("Projects")]
-        public void TestProjectsGetComments(String input)
+        public void TestGetCommentsProjects(String input)
         {
             String mockedResponse =
                 "[" +
@@ -87,13 +103,12 @@ namespace MvcWebsite.Tests.Unit
                 }
             };
 
-            AssertCommentsGot(actualComments, expectedComments);
-
+            AssertCommentCollectionsEqual(expectedComments, actualComments);
         }
 
         [Test]
         [TestCase("ContactMe")]
-        public void TestContactMeGetComments(String input)
+        public void TestGetCommentsContactMe(String input)
         {
             String mockedResponse =
                 "[" +
@@ -130,13 +145,12 @@ namespace MvcWebsite.Tests.Unit
                 }
             };
 
-            AssertCommentsGot(actualComments, expectedComments);
-
+            AssertCommentCollectionsEqual(expectedComments, actualComments);
         }
 
         [Test]
         [TestCase("EmptyResponse")]
-        public void TestEmptyResponseComments(String input)
+        public void TestGetCommentsEmptyResponse(String input)
         {
             String mockedResponse =
                 "[" +
@@ -146,25 +160,7 @@ namespace MvcWebsite.Tests.Unit
 
             var expectedComments = new List<CommentModel>();
 
-            AssertCommentsGot(actualComments, expectedComments);
-
-        }
-
-        private void AssertCommentsGot(List<CommentModel> actualList, List<CommentModel> expectedList)
-        {
-            Assert.AreEqual(actualList.Count, expectedList.Count);
-
-            foreach (var expected in expectedList)
-            {
-                if (actualList.Any(comment => comment.Id.Equals(expected.Id)))
-                {
-                    var actualComment = actualList.First(comment => comment.Id.Equals(expected.Id));
-                    Assert.AreEqual(expected.Id, actualComment.Id);
-                    Assert.AreEqual(expected.Comment, actualComment.Comment);
-                    Assert.AreEqual(expected.UserName, actualComment.UserName);
-                    Assert.AreEqual(expected.Webpage, actualComment.Webpage);
-                }
-            }
+            AssertCommentCollectionsEqual(expectedComments, actualComments);
         }
     }
 }
