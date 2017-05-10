@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using MvcWebsite.MessageBroker;
 using MvcWebsite.Models;
 using MvcWebsite.Tests.Unit.MockedComponents;
@@ -28,10 +29,15 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
             }
         }
 
-        [Test]
-        [TestCase("Index")]
-        public void TestGetCommentsIndex(String input)
+        private void AssertCorrectResponse(System.Net.HttpStatusCode expected, System.Net.HttpStatusCode actual)
         {
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestGetCommentsIndex()
+        {
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.OK;
             String mockedResponse =
                 "[" +
                 "{" +
@@ -47,7 +53,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 "'Webpage':'ContactMe'," +
                 "}" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("Index").ToList();
 
             var expectedComments = new List<CommentModel>()
@@ -65,9 +71,9 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        [TestCase("Projects")]
-        public void TestGetCommentsProjects(String input)
+        public void TestGetCommentsProjects()
         {
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.OK;
             String mockedResponse =
                 "[" +
                 "{" +
@@ -89,7 +95,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 "'Webpage':'Projects'," +
                 "}" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("Projects").ToList();
 
             var expectedComments = new List<CommentModel>()
@@ -107,9 +113,9 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        [TestCase("ContactMe")]
-        public void TestGetCommentsContactMe(String input)
+        public void TestGetCommentsContactMe()
         {
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.OK;
             String mockedResponse =
                 "[" +
                 "{" +
@@ -131,7 +137,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 "'Webpage':'Projects'," +
                 "}" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("ContactMe").ToList();
 
             var expectedComments = new List<CommentModel>()
@@ -149,13 +155,13 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        [TestCase("EmptyResponse")]
-        public void TestGetCommentsEmptyResponse(String input)
+        public void TestGetCommentsEmptyResponse()
         {
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.OK;
             String mockedResponse =
                 "[" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("ContactMe").ToList();
 
             var expectedComments = new List<CommentModel>();

@@ -18,10 +18,10 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        [TestCase("Index")]
-        public void TestAddCommentIndex(String input)
+        public void TestAddComment()
         {
-            String mockedResponse = HttpStatusCode.OK.ToString();
+            String mockedResponse = "";
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.OK;
             CommentModel mockedComment = new CommentModel()
             {
                 Comment = "testAddComment",
@@ -29,7 +29,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 UserName = "testAddUsername",
                 Webpage = "Index"
             };
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             System.Net.HttpStatusCode actualResponse = messageBrokerApi.AddComment(mockedComment);
             System.Net.HttpStatusCode expectedResponse = HttpStatusCode.OK;
 
@@ -37,18 +37,18 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        [TestCase("Projects")]
-        public void TestAddCommentProjects(String input)
+        public void TestAddCommentNull()
         {
-            String mockedResponse = HttpStatusCode.OK.ToString();
+            String mockedResponse = "";
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.OK;
             CommentModel mockedComment = new CommentModel()
             {
-                Comment = "testAddComment",
+                Comment = null,
                 Id = 1,
-                UserName = "testAddUsername",
-                Webpage = "Projects"
+                UserName = null,
+                Webpage = null
             };
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             System.Net.HttpStatusCode actualResponse = messageBrokerApi.AddComment(mockedComment);
             System.Net.HttpStatusCode expectedResponse = HttpStatusCode.OK;
 
@@ -56,18 +56,18 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        [TestCase("ContactMe")]
-        public void TestAddCommentContactMe(String input)
+        public void TestAddCommentEmpty()
         {
-            String mockedResponse = HttpStatusCode.OK.ToString();
+            String mockedResponse = "";
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.BadRequest;
             CommentModel mockedComment = new CommentModel()
             {
-                Comment = "testAddComment",
+                Comment = "",
                 Id = 1,
-                UserName = "testAddUsername",
-                Webpage = "ContactMe"
+                UserName = "",
+                Webpage = ""
             };
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse));
+            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             System.Net.HttpStatusCode actualResponse = messageBrokerApi.AddComment(mockedComment);
             System.Net.HttpStatusCode expectedResponse = HttpStatusCode.OK;
 

@@ -9,16 +9,20 @@ namespace MvcWebsite.Tests.Unit.MockedComponents
 {
     public class MockHttpMessageHandler : HttpMessageHandler
     {
-        readonly String _mockedResponse;
-        public MockHttpMessageHandler(String mockedResponse)
+        private readonly String _mockResponse;
+        private readonly MockLogger _logger = new MockLogger();
+        readonly System.Net.HttpStatusCode _mockHttpResponse;
+
+        public MockHttpMessageHandler(String mockedResponse, System.Net.HttpStatusCode mockedHttpResponse)
         {
-            _mockedResponse = mockedResponse;
+            _mockResponse = mockedResponse;
+            _mockHttpResponse = mockedHttpResponse;
         }
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var responseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+            var responseMessage = new HttpResponseMessage(_mockHttpResponse)
             {
-                Content = new StringContent(_mockedResponse,Encoding.ASCII,"application/json"),
+                Content = new StringContent(_mockResponse, Encoding.ASCII, "application/json"),
             };
 
             return await Task.FromResult(responseMessage);

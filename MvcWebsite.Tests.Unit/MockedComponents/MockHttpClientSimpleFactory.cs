@@ -8,14 +8,15 @@ namespace MvcWebsite.Tests.Unit.MockedComponents
     class MockHttpClientSimpleFactory : IHttpClientSimpleFactory
     {
         readonly String _mockResponse;
-        public MockHttpClientSimpleFactory(String mockedResponse)
+        readonly System.Net.HttpStatusCode _mockHttpResponse;
+        public MockHttpClientSimpleFactory(String mockedResponse, System.Net.HttpStatusCode mockedHttpResponse)
         {
             _mockResponse = mockedResponse;
+            _mockHttpResponse = mockedHttpResponse;
         }
-
         public HttpClient CreateClient()
         {
-             var client = new HttpClient(new MockHttpMessageHandler(_mockResponse))
+             var client = new HttpClient(new MockHttpMessageHandler(_mockResponse, _mockHttpResponse))
              {
                  BaseAddress = new Uri(new Uri("http://127.0.0.1"), "testApiPath")
 
