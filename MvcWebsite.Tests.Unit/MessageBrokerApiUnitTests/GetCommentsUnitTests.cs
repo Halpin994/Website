@@ -166,5 +166,16 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
 
             AssertCommentCollectionsEqual(expectedComments, actualComments);
         }
+
+        [Test]
+        public void TestGetCommentsNoBrokerException()
+        {
+            String mockedResponse = null;
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.NotFound;
+
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            messageBrokerApi.GetComments();
+            Assert.AreNotEqual(logger.exceptionLogged, null);
+        }
     }
 }
