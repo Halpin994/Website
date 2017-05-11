@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using MvcWebsite.Settings;
 
 namespace MvcWebsite.Logger
@@ -11,15 +12,15 @@ namespace MvcWebsite.Logger
         {
             _settings = webSiteSettings;
         }
-        public void LogPageVisit(string input)
+        public void LogPageVisit(String input)
         {
             WriteLog(input, _settings.PageVisitLogPath);
         }
-        public void LogException(string input)
+        public void LogException(String exception)
         {
-            WriteLog(input, _settings.ExceptionLogPath);
+            WriteLog(exception, _settings.ExceptionLogPath);
         }
-        public void LogComment(string input)
+        public void LogComment(String input)
         {
             WriteLog(input, _settings.CommentLogPath);
         }

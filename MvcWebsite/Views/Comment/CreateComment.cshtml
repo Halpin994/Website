@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm("CreateComment", "Comment", FormMethod.Post, new { id = "commentForm" }))
 {
-    <fieldset>
+    <fieldset style="background-color:whitesmoke">
         @Html.HiddenFor(newComment => newComment.Id)
         @Html.HiddenFor(newComment => newComment.Webpage)
 

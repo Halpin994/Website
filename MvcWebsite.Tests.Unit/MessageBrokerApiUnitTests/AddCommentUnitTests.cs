@@ -12,7 +12,13 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
     [TestFixture]
     public class AddCommentUnitTests
     {
+        private MockLogger logger = new MockLogger();
+
         private void AssertCorrectResponse(System.Net.HttpStatusCode expected, System.Net.HttpStatusCode actual)
+        {
+            Assert.AreEqual(expected, actual);
+        }
+        private void AssertCorrectException(String expected, String actual)
         {
             Assert.AreEqual(expected, actual);
         }
@@ -29,7 +35,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 UserName = "testAddUsername",
                 Webpage = "Index"
             };
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             System.Net.HttpStatusCode actualResponse = messageBrokerApi.AddComment(mockedComment);
             System.Net.HttpStatusCode expectedResponse = HttpStatusCode.OK;
 
@@ -48,7 +54,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 UserName = null,
                 Webpage = null
             };
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             System.Net.HttpStatusCode actualResponse = messageBrokerApi.AddComment(mockedComment);
             System.Net.HttpStatusCode expectedResponse = HttpStatusCode.OK;
 
@@ -56,22 +62,39 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
         }
 
         [Test]
-        public void TestAddCommentEmpty()
+        public void TestAddCommentNoResponse()
         {
             String mockedResponse = "";
-            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.BadRequest;
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.NotFound;
             CommentModel mockedComment = new CommentModel()
             {
-                Comment = "",
+                Comment = "test",
                 Id = 1,
-                UserName = "",
-                Webpage = ""
+                UserName = "test",
+                Webpage = "test"
             };
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             System.Net.HttpStatusCode actualResponse = messageBrokerApi.AddComment(mockedComment);
-            System.Net.HttpStatusCode expectedResponse = HttpStatusCode.OK;
+            System.Net.HttpStatusCode expectedResponse = HttpStatusCode.NotFound;
 
             AssertCorrectResponse(expectedResponse, actualResponse);
+        }
+
+        [Test]
+        public void TestAddCommentNoBrokerException()
+        {
+            String mockedResponse = null;
+            System.Net.HttpStatusCode mockedHttpResponse = HttpStatusCode.NotFound;
+            CommentModel mockedComment = new CommentModel()
+            {
+                Comment = "test",
+                Id = 1,
+                UserName = "test",
+                Webpage = "test"
+            };
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            messageBrokerApi.AddComment(mockedComment);
+            Assert.AreNotEqual(logger.exceptionLogged, null);
         }
     }
 }

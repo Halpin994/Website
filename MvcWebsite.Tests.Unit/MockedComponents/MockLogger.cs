@@ -1,18 +1,22 @@
-﻿using MvcWebsite.Logger;
+﻿using System;
+using MvcWebsite.Logger;
 
 namespace MvcWebsite.Tests.Unit.MockedComponents
 {
     public class MockLogger: ILogger
     {
-        public void LogPageVisit(string input)
+        public String exceptionLogged;
+
+        public void LogPageVisit(String input)
         {
         }
 
-        public void LogException(string input)
+        public void LogException(String exception)
         {
+            exceptionLogged = exception;
         }
 
-        public void LogComment(string input)
+        public void LogComment(String input)
         {
         }
     }

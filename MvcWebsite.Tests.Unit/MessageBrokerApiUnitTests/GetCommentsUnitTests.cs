@@ -9,9 +9,12 @@ using MvcWebsite.Tests.Unit.MockedComponents;
 
 namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
 {
+
     [TestFixture]
     public class GetCommentsUnitTests
     {
+        private MockLogger logger = new MockLogger();
+
         private void AssertCommentCollectionsEqual(List<CommentModel> expectedList, List<CommentModel> actualList)
         {
             Assert.AreEqual(actualList.Count, expectedList.Count);
@@ -27,11 +30,6 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                     Assert.AreEqual(expected.Webpage, actualComment.Webpage);
                 }
             }
-        }
-
-        private void AssertCorrectResponse(System.Net.HttpStatusCode expected, System.Net.HttpStatusCode actual)
-        {
-            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -53,7 +51,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 "'Webpage':'ContactMe'," +
                 "}" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("Index").ToList();
 
             var expectedComments = new List<CommentModel>()
@@ -95,7 +93,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 "'Webpage':'Projects'," +
                 "}" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("Projects").ToList();
 
             var expectedComments = new List<CommentModel>()
@@ -137,7 +135,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
                 "'Webpage':'Projects'," +
                 "}" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("ContactMe").ToList();
 
             var expectedComments = new List<CommentModel>()
@@ -161,7 +159,7 @@ namespace MvcWebsite.Tests.Unit.MessageBrokerApiUnitTests
             String mockedResponse =
                 "[" +
                 "]";
-            var messageBrokerApi = new MessageBrokerApi(new MockLogger(), new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
+            var messageBrokerApi = new MessageBrokerApi(logger, new MockHttpClientSimpleFactory(mockedResponse, mockedHttpResponse));
             var actualComments = messageBrokerApi.GetPageComments("ContactMe").ToList();
 
             var expectedComments = new List<CommentModel>();
