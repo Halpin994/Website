@@ -520,14 +520,14 @@ public IHttpActionResult Post(CommentModel comment)
                 </pre>
             </p>
 <p><b>Comment List View</b></p>
-<p>
-    Inside each pages controller we get the comments for that page and return them to the view to be displayed. This expample is specific to the projects page.
-    <pre style="word-wrap:break-word">
+    <p>
+        Inside each pages controller we get the comments for that page and return them to the view to be displayed. This expample is specific to the projects page.
+        <pre style="word-wrap:break-word">
 var pageComments = _messageBroker.GetPageComments("Projects");
 return View(pageComments);
             </pre>
-    This is what the actual view for the CommentList looks like. As you can see all it does is lists out each comments Username and Comment. It doesn't need to sort which comments it needs as they have already been sorted in the message broker. I define the model the view accepts at the top as shown. It uses the IEnumerable type so I can use the foreach operator.
-    <pre style="word-wrap:break-word">
+        This is what the actual view for the CommentList looks like. As you can see all it does is lists out each comments Username and Comment. It doesn't need to sort which comments it needs as they have already been sorted in the message broker. I define the model the view accepts at the top as shown. It uses the IEnumerable type so I can use the foreach operator.
+        <pre style="word-wrap:break-word">
 &#x40;model IEnumerable&lt;MvcWebsite.Models.CommentModel>
 &#x40;foreach (var item in Model)
 {
@@ -536,11 +536,14 @@ return View(pageComments);
     &lt;/fieldset>
 }
             </pre>
-            Finally, inside the project view we use the following line of code to render the comment list view inside the projects page.
-            <pre style="word-wrap:break-word">
+        Finally, inside the project view we use the following line of code to render the comment list view inside the projects page.
+        <pre style="word-wrap:break-word">
 &#x40;{Html.RenderPartial("~/Views/Comment/CommentList.cshtml");}
             </pre>
-        </p>
+    </p>
+    <div align="center"><h4>• Testing</h4></div>
+    <p><b>Unit Tests</b></p>
+    <p><b>SpecFlow Tests</b></p>
         <br />
         <div align="center">
             <p style="padding: 10px; background-color: #333333; color: white; border: #111111 2px solid; font-size:22px; border-radius: 3px 4px">
