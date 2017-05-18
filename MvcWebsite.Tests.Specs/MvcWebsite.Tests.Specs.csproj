@@ -60,6 +60,7 @@
       <HintPath>..\packages\SpecRun.SpecFlow.1.5.2\lib\net45\SpecRun.SpecFlowPlugin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -80,29 +81,31 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="AddComment.feature.cs">
+    <Compile Include="CommentsSpecFlowTests\AddCommentHttp.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AddComment.feature</DependentUpon>
+      <DependentUpon>AddCommentHttp.feature</DependentUpon>
     </Compile>
-    <Compile Include="AddCommentSteps.cs" />
+    <Compile Include="CommentsSpecFlowTests\AddCommentHttpSteps.cs" />
     <Compile Include="Calculator.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Calculator.feature</DependentUpon>
     </Compile>
     <Compile Include="CalculatorSteps.cs" />
+    <Compile Include="MockedComponents\MockLogger.cs" />
+    <Compile Include="MockedComponents\MockSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AddComment.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddComment.feature.cs</LastGenOutput>
-    </None>
     <None Include="App.config" />
     <None Include="Calculator.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Calculator.feature.cs</LastGenOutput>
+    </None>
+    <None Include="CommentsSpecFlowTests\AddCommentHttp.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddCommentHttp.feature.cs</LastGenOutput>
     </None>
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
