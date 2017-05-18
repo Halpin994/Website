@@ -15,9 +15,9 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
     public class AddCommentHttpSteps
     {
         private static MockSettings _settings = new MockSettings();
-        private HttpClientSimpleFactory _clientFactory = new HttpClientSimpleFactory(_settings);
+        private HttpClientSimpleFactory _httpClientFactory = new HttpClientSimpleFactory(_settings);
         private List<CommentModel> _actualComments;
-        private CommentModel expectedComment = new CommentModel(){Comment = "SpecTestComment", Id = 0, UserName = "SpecTestUser", Webpage = "SpecTest"};
+        private CommentModel _expectedComment = new CommentModel(){Comment = "SpecTestComment", Id = 0, UserName = "SpecTestUser", Webpage = "SpecTest"};
 
         [Given(@"I post a comment to the comments controller")]
         public void GivenIPostACommentToTheCommentsController()
@@ -33,7 +33,7 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
         public void WhenIGetTheComments()
         {
             HttpResponseMessage response;
-            using (var client = _clientFactory.CreateClient())
+            using (var client = _httpClientFactory.CreateClient())
             {
                 response = client.GetAsync(client.BaseAddress).Result;
             }
@@ -41,7 +41,7 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
 
             _actualComments = result.ToList();
 
-            expectedComment.Id = _actualComments.Last().Id;
+            _expectedComment.Id = _actualComments.Last().Id;
         }
         
         [Then(@"the comment I posted is available")]
@@ -49,12 +49,12 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
         {
             foreach (var actual in _actualComments)
             {
-                if (_actualComments.Any(comment => comment.Id.Equals(expectedComment.Id)))
+                if (_actualComments.Any(comment => comment.Id.Equals(_expectedComment.Id)))
                 {
-                    var actualComment = _actualComments.First(comment => comment.Id.Equals(expectedComment.Id));
-                    Assert.AreEqual(expectedComment.Comment, actualComment.Comment);
-                    Assert.AreEqual(expectedComment.UserName, actualComment.UserName);
-                    Assert.AreEqual(expectedComment.Webpage, actualComment.Webpage);
+                    var actualComment = _actualComments.First(comment => comment.Id.Equals(_expectedComment.Id));
+                    Assert.AreEqual(_expectedComment.Comment, actualComment.Comment);
+                    Assert.AreEqual(_expectedComment.UserName, actualComment.UserName);
+                    Assert.AreEqual(_expectedComment.Webpage, actualComment.Webpage);
                 }
             }
         }
