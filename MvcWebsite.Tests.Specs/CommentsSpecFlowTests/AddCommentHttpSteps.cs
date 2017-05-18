@@ -1,31 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using TechTalk.SpecFlow;
-using MvcWebsite.MessageBroker;
 using MvcWebsite.HttpClientFactory;
 using MvcWebsite.Models;
 using MvcWebsite.Tests.Specs.MockedComponents;
 using NUnit.Framework;
+
 
 namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
 {
     [Binding]
     public class AddCommentHttpSteps
     {
-        private readonly MockSettings _settings = new MockSettings();
-        private readonly MockLogger _mockLogger = new MockLogger();
-        private readonly MessageBrokerApi _messageBroker;
+        private static MockSettings _settings = new MockSettings();
+        private HttpClientSimpleFactory _clientFactory = new HttpClientSimpleFactory(_settings);
         private List<CommentModel> _actualComments;
-        private CommentModel expectedComment;
-
-        AddCommentHttpSteps()
-        {
-            var httpClientSimpleFactory = new HttpClientSimpleFactory(_settings);
-            _messageBroker = new MessageBrokerApi(_mockLogger, httpClientSimpleFactory);
-            expectedComment = new CommentModel(){Comment = "SpecTestComment", Id = 500, UserName = "SpecTestUser", Webpage = "SpecTest"};
-        }
+        private CommentModel expectedComment = new CommentModel(){Comment = "SpecTestComment", Id = 0, UserName = "SpecTestUser", Webpage = "SpecTest"};
 
         [Given(@"I post a comment to the comments controller")]
         public void GivenIPostACommentToTheCommentsController()
@@ -40,7 +32,15 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
         [When(@"I get the comments")]
         public void WhenIGetTheComments()
         {
-            _actualComments = _messageBroker.GetComments().ToList();
+            HttpResponseMessage response;
+            using (var client = _clientFactory.CreateClient())
+            {
+                response = client.GetAsync(client.BaseAddress).Result;
+            }
+            var result = response.Content.ReadAsAsync<IEnumerable<CommentModel>>().Result;
+
+            _actualComments = result.ToList();
+
             expectedComment.Id = _actualComments.Last().Id;
         }
         
