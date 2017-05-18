@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcWebsite.Tests.Unit", "Mv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcWebsite.Tests.Specs", "MvcWebsite.Tests.Specs\MvcWebsite.Tests.Specs.csproj", "{C52FBB84-82C0-45A9-891B-4CBE88A372BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlowCalculator\SpecFlowCalculator.csproj", "{F668A15C-08B1-412B-87E5-588BEB5361F2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,17 +58,6 @@ Global
 		{C52FBB84-82C0-45A9-891B-4CBE88A372BA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C52FBB84-82C0-45A9-891B-4CBE88A372BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C52FBB84-82C0-45A9-891B-4CBE88A372BA}.Release|x86.ActiveCfg = Release|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Debug|x86.Build.0 = Debug|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F668A15C-08B1-412B-87E5-588BEB5361F2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

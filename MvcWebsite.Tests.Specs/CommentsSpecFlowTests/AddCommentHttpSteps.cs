@@ -41,6 +41,7 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
         public void WhenIGetTheComments()
         {
             _actualComments = _messageBroker.GetComments().ToList();
+            expectedComment.Id = _actualComments.Last().Id;
         }
         
         [Then(@"the comment I posted is available")]
@@ -48,9 +49,9 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
         {
             foreach (var actual in _actualComments)
             {
-                if (_actualComments.Any(comment => comment.Webpage.Equals("SpecTest")))
+                if (_actualComments.Any(comment => comment.Id.Equals(expectedComment.Id)))
                 {
-                    var actualComment = _actualComments.Last(comment => comment.Webpage.Equals("SpecTest"));
+                    var actualComment = _actualComments.First(comment => comment.Id.Equals(expectedComment.Id));
                     Assert.AreEqual(expectedComment.Comment, actualComment.Comment);
                     Assert.AreEqual(expectedComment.UserName, actualComment.UserName);
                     Assert.AreEqual(expectedComment.Webpage, actualComment.Webpage);

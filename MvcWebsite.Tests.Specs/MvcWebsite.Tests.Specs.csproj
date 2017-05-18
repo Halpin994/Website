@@ -87,22 +87,12 @@
       <DependentUpon>AddCommentHttp.feature</DependentUpon>
     </Compile>
     <Compile Include="CommentsSpecFlowTests\AddCommentHttpSteps.cs" />
-    <Compile Include="Calculator.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Calculator.feature</DependentUpon>
-    </Compile>
-    <Compile Include="CalculatorSteps.cs" />
     <Compile Include="MockedComponents\MockLogger.cs" />
     <Compile Include="MockedComponents\MockSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Calculator.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Calculator.feature.cs</LastGenOutput>
-    </None>
     <None Include="CommentsSpecFlowTests\AddCommentHttp.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AddCommentHttp.feature.cs</LastGenOutput>
@@ -123,10 +113,6 @@
     <ProjectReference Include="..\MvcWebsite\MvcWebsite.csproj">
       <Project>{33232b88-7faa-4966-bec1-c832bfe39564}</Project>
       <Name>MvcWebsite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpecFlowCalculator\SpecFlowCalculator.csproj">
-      <Project>{f668a15c-08b1-412b-87e5-588beb5361f2}</Project>
-      <Name>SpecFlowCalculator</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
