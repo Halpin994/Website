@@ -26,7 +26,7 @@ namespace MvcWebsite.Tests.Specs.CommentsSpecFlowTests
         {
             using (var wc = new WebClient())
             {
-                rand = R.Next(10000);
+                rand = R.Next();
                 wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                 var comment = "Id=0&Webpage=SpecTest" + rand + "&UserName=SpecTestUser&Comment=SpecTestComment";
                 var htmlResult = wc.UploadString("http://localhost:8888/api/comments/", comment);
