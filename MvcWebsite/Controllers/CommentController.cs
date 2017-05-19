@@ -26,7 +26,7 @@ namespace MvcWebsite.Controllers
         public ActionResult CreateComment(CommentModel commentToCreate)
         {
             _messageBroker.AddComment(commentToCreate);
-            _logger.LogComment(String.Format("Time = {0}, RemoteIP = {1}, Page = {2}, UserName = {3}, Comment = {4}", DateTime.Now, Request.UserHostAddress, commentToCreate.Webpage, commentToCreate.UserName, commentToCreate.Comment));
+            _logger.LogComment(String.Format("Time = {0}, RemoteIP = {1}, Page = {2}, UserName = {3}, Comment = {4}", DateTime.Now, Request.UserHostAddress, commentToCreate.Webpage, commentToCreate.UserName,commentToCreate.Comment));
 
             switch(commentToCreate.Webpage)
             {
